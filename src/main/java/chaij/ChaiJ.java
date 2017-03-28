@@ -1,47 +1,57 @@
 package chaij;
 
-import static org.eclipse.jdt.annotation.DefaultLocation.FIELD;
-import static org.eclipse.jdt.annotation.DefaultLocation.RETURN_TYPE;
-import static org.eclipse.jdt.annotation.DefaultLocation.TYPE_ARGUMENT;
-import static org.eclipse.jdt.annotation.DefaultLocation.TYPE_BOUND;
 
-
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-
-@NonNullByDefault({RETURN_TYPE, FIELD, TYPE_BOUND, TYPE_ARGUMENT})
-public class ChaiJ {
+@SuppressWarnings({"MethodReturnOfConcreteClass", "OverloadedMethodsWithSameNumberOfParameters"})
+public final class ChaiJ {
 	
-	public static IntExpectation expect(int i) {
-		return new IntExpectation(i);
+	private ChaiJ() {}
+	
+	
+	public static IntExpectation expect(int value) {
+		
+		return new IntExpectation(value, null);
 	}
 	
-	public static IntExpectation expect(int i, @NonNull String message) {
-		return new IntExpectation(i, message);
+	
+	public static IntExpectation expect(int value, String message) {
+		
+		return new IntExpectation(value, message);
 	}
 	
-	public static LongExpectation expect(long i) {
-		return new LongExpectation(i);
+	
+	public static LongExpectation expect(long value) {
+		
+		return new LongExpectation(value, null);
 	}
 	
-	public static LongExpectation expect(long i, @NonNull String message) {
-		return new LongExpectation(i, message);
+	
+	public static LongExpectation expect(long value, String message) {
+		
+		return new LongExpectation(value, message);
 	}
 	
-	public static DoubleExpectation expect(double i) {
-		return new DoubleExpectation(i);
+	
+	public static DoubleExpectation expect(double value) {
+		
+		return new DoubleExpectation(value, null);
 	}
 	
-	public static DoubleExpectation expect(double i, @NonNull String message) {
-		return new DoubleExpectation(i, message);
+	
+	public static DoubleExpectation expect(double value, String message) {
+		
+		return new DoubleExpectation(value, message);
 	}
 	
-	public static BooleanExpectation expect(boolean i) {
-		return new BooleanExpectation(i);
+	
+	public static BooleanExpectation expect(boolean value) {
+		
+		return new BooleanExpectation(value, null);
 	}
 	
-	public static BooleanExpectation expect(boolean i,
-											@NonNull String message) {
-		return new BooleanExpectation(i, message);
+	
+	public static BooleanExpectation expect(boolean value, String message) {
+		
+		return new BooleanExpectation(value, message);
 	}
+	
 }

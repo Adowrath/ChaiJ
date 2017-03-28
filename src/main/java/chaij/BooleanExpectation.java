@@ -1,29 +1,7 @@
 package chaij;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 public class BooleanExpectation {
-	
-	public static final Set<String> unimplementedFunctions;
-	
-	//@formatter:off
-	static {
-		unimplementedFunctions = new HashSet<>();
-		unimplementedFunctions
-				.addAll(Arrays.asList(	
-//				                      	"not",
-				                      	"any",
-				                      	"all",
-//				                      	"ok",
-//				                      	"_true",
-//				                      	"_false",
-//				                      	"equal",
-										""
-										));
-	}
-	//@formatter:on
 	
 	public final BooleanExpectation to = this;
 	public final BooleanExpectation be = this;
@@ -84,61 +62,62 @@ public class BooleanExpectation {
 		return this;
 	}
 	
-	/**
-	 * any - some method (currently not implemented!)
-	 */
-	public BooleanExpectation any() {
-		throw new UnsupportedOperationException("any");
-	}
-	
-	/**
-	 * all - some method (currently not implemented!)
-	 */
-	public BooleanExpectation all() {
-		throw new UnsupportedOperationException("all");
-	}
 	
 	/**
 	 * Checks whether the {@code boolean} is {@code true}.
-	 * 
+	 *
 	 * @return the expectation itself for chaining
+	 *
 	 * @see #_true()
 	 */
 	public BooleanExpectation ok() {
+		
 		return test(my, "Expected a", "ok-ish boolean.");
 	}
 	
+	
 	/**
 	 * Checks whether the {@code boolean} is {@code true}.
-	 * 
+	 *
 	 * @return the expectation itself for chaining
+	 *
 	 * @see #ok()
 	 */
+	@SuppressWarnings("InstanceMethodNamingConvention")
 	public BooleanExpectation _true() {
+		
 		return test(my, "Expected a", "true boolean.");
 	}
 	
+	
 	/**
 	 * Checks whether the {@code boolean} is {@code false}.
-	 * 
+	 *
 	 * @return the expectation itself for chaining
 	 */
+	@SuppressWarnings("InstanceMethodNamingConvention")
 	public BooleanExpectation _false() {
+		
 		return test(!my, "Expected a", "false boolean.");
 	}
 	
+	
 	/**
 	 * Checks whether the {@code boolean} is equal to {@code boolean}.
-	 * 
-	 * @param expected
-	 *        the other value that should be compared with
+	 *
+	 * @param expected the other value that should be compared with
+	 *
 	 * @return the expectation itself for chaining
+	 *
 	 * @see #_false()
 	 * @see #_true()
 	 * @see #ok()
 	 */
+	@SuppressWarnings("MisspelledEquals")
 	public BooleanExpectation equal(boolean expected) {
+		
 		return test(my == expected, "Expected " + my + " to",
-					"equal " + expected + ".");
+					"equal " + expected + '.'
+		);
 	}
 }
