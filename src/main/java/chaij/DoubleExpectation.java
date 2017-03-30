@@ -4,65 +4,35 @@ package chaij;
 import java.util.Arrays;
 import java.util.function.DoublePredicate;
 
-public class DoubleExpectation {
-	
-	public final DoubleExpectation to = this;
-	public final DoubleExpectation be = this;
-	public final DoubleExpectation been = this;
-	public final DoubleExpectation is = this;
-	public final DoubleExpectation that = this;
-	public final DoubleExpectation which = this;
-	public final DoubleExpectation and = this;
-	public final DoubleExpectation has = this;
-	public final DoubleExpectation have = this;
-	public final DoubleExpectation with = this;
-	public final DoubleExpectation at = this;
-	public final DoubleExpectation of = this;
-	public final DoubleExpectation same = this;
-	
-	private boolean notFlag = false;
+/**
+ * A {@code double} expectation offers all methods that are available on all
+ * numeric types - e.g. {@link #above(double)}, {@link #oneOf(double...)}
+ * etc., but also some floating point-specific methods like {@link #NaN()},
+ * {@link #finite()} etc.
+ *
+ * <p>
+ * Note that there is no special expectation for {@code float} values because
+ * there always exists a promotion from {@code float} to {@code double}.
+ */
+public final class DoubleExpectation extends BaseExpectation<DoubleExpectation> {
 	
 	private final double my;
 	
-	public DoubleExpectation(double i) {
-		my = i;
-	}
 	
-	public DoubleExpectation(double i, String s) {
-		my = i;
-	}
-	
-	protected DoubleExpectation test(	boolean result,
-										String firstPart,
-										String secondPart) {
-		if(result ^ notFlag) {
-			return this;
-		}
-		throw new UnmetExpectationException(firstPart
-				+ (notFlag ? " not " : " ") + secondPart);
-	}
-	
-	//@formatter:off
 	/**
-	 * Negates the behaviour of any further expectations.
-	 * 
+	 * Constructs a new DoubleExpectation.
+	 *
 	 * <p>
-	 * E.g. while
-	 * 
-	 * <pre>expect(42.0).to.equal(13.0);</pre>
-	 * 
-	 * fails,
-	 * 
-	 * <pre>expect(42.0).to.not().equal(13.0);</pre>
-	 * 
-	 * succeeds.
-	 * 
-	 * @return the expectation itself for chaining
+	 * You should not use this constructor directly, but instead get
+	 * an expectation through {@link chaij.ChaiJ#expect(double)} or
+	 * {@link chaij.ChaiJ#expect(double, java.lang.String)}
+	 *
+	 * @param d the {@code double} that is used for all operations
+	 * @param s an optional custom expectation message.
 	 */
-	//@formatter:on
-	public DoubleExpectation not() {
-		this.notFlag = !notFlag;
-		return this;
+	DoubleExpectation(double d, String s) {
+		
+		my = d;
 	}
 	
 	

@@ -4,67 +4,32 @@ package chaij;
 import java.util.Arrays;
 import java.util.function.IntPredicate;
 
-public class IntExpectation {
-	
-	public final IntExpectation to = this;
-	public final IntExpectation be = this;
-	public final IntExpectation been = this;
-	public final IntExpectation is = this;
-	public final IntExpectation that = this;
-	public final IntExpectation which = this;
-	public final IntExpectation and = this;
-	public final IntExpectation has = this;
-	public final IntExpectation have = this;
-	public final IntExpectation with = this;
-	public final IntExpectation at = this;
-	public final IntExpectation of = this;
-	public final IntExpectation same = this;
-	
-	private boolean notFlag = false;
+/**
+ * An {@code int} expectation offers all methods that are available on all
+ * numeric types - e.g. {@link #above(int)}, {@link #oneOf(int...)}
+ * etc., but also validity checkers such as the {@link #validByte()} and
+ * {@link #validShort()} methods.
+ */
+public class IntExpectation extends BaseExpectation<IntExpectation> {
 	
 	private final int my;
 	
-	public IntExpectation(int i) {
-		my = i;
-	}
 	
-	public IntExpectation(int i, String s) {
-		my = i;
-	}
-	
-	protected IntExpectation test(	boolean result,
-									String firstPart,
-									String secondPart) {
-		if(result ^ notFlag) {
-			return this;
-		}
-		throw new UnmetExpectationException(firstPart
-				+ (notFlag ? " not " : " ") + secondPart);
-	}
-	
-	//@formatter:off
 	/**
-	 * Negates the behaviour of any further expectations.
-	 * 
+	 * Constructs a new IntExpectation.
+	 *
 	 * <p>
-	 * E.g. while
-	 * 
-	 * <pre>expect(42).to.equal(13);</pre>
-	 * 
-	 * fails,
-	 * 
-	 * <pre>expect(42).to.not().equal(13);</pre>
-	 * 
-	 * succeeds.
-	 * 
-	 * @return the expectation itself for chaining
+	 * You should not use this constructor directly, but instead get
+	 * an expectation through {@link chaij.ChaiJ#expect(int)} or
+	 * {@link chaij.ChaiJ#expect(int, java.lang.String)}
+	 *
+	 * @param i the {@code int} that is used for all operations
+	 * @param s an optional custom expectation message.
 	 */
-	//@formatter:on
-	public IntExpectation not() {
-		this.notFlag = !notFlag;
-		return this;
+	IntExpectation(int i, String s) {
+		
+		my = i;
 	}
-	
 	
 	
 	/**

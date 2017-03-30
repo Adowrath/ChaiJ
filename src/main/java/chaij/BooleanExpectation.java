@@ -1,65 +1,33 @@
 package chaij;
 
 
-public class BooleanExpectation {
-	
-	public final BooleanExpectation to = this;
-	public final BooleanExpectation be = this;
-	public final BooleanExpectation been = this;
-	public final BooleanExpectation is = this;
-	public final BooleanExpectation that = this;
-	public final BooleanExpectation which = this;
-	public final BooleanExpectation and = this;
-	public final BooleanExpectation has = this;
-	public final BooleanExpectation have = this;
-	public final BooleanExpectation with = this;
-	public final BooleanExpectation at = this;
-	public final BooleanExpectation of = this;
-	public final BooleanExpectation same = this;
+/**
+ * A {@code boolean} valued expectation.
+ *
+ * <p>
+ * Because of the limited amount of values a boolean can take,
+ * this class only offers an equally limited subset of operations
+ * that suffice for working with booleans.
+ */
+public final class BooleanExpectation extends BaseExpectation<BooleanExpectation> {
 	
 	private final boolean my;
 	
-	private boolean notFlag;
 	
-	public BooleanExpectation(boolean b) {
-		my = b;
-	}
-	
-	public BooleanExpectation(boolean b, String s) {
-		my = b;
-	}
-	
-	protected BooleanExpectation test(	boolean result,
-										String firstPart,
-										String secondPart) {
-		if(result ^ notFlag) {
-			return this;
-		}
-		throw new UnmetExpectationException(firstPart
-				+ (notFlag ? " not " : " ") + secondPart);
-	}
-	
-	//@formatter:off
 	/**
-	 * Negates the behaviour of any further expectations.
-	 * 
+	 * Constructs a new BooleanExpectation.
+	 *
 	 * <p>
-	 * E.g. while
-	 * 
-	 * <pre>expect(true).to.equal(false);</pre>
-	 * 
-	 * fails,
-	 * 
-	 * <pre>expect(true).to.not().equal(false);</pre>
-	 * 
-	 * succeeds.
-	 * 
-	 * @return the expectation itself for chaining
+	 * You should not use this constructor directly, but instead get
+	 * an expectation through {@link chaij.ChaiJ#expect(boolean)} or
+	 * {@link chaij.ChaiJ#expect(boolean, java.lang.String)}
+	 *
+	 * @param my the {@code boolean} that is used for all operations
+	 * @param s  an optional custom expectation message.
 	 */
-	//@formatter:on
-	public BooleanExpectation not() {
-		this.notFlag = !notFlag;
-		return this;
+	BooleanExpectation(boolean my, String s) {
+		
+		this.my = my;
 	}
 	
 	

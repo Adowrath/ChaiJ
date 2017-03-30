@@ -4,67 +4,32 @@ package chaij;
 import java.util.Arrays;
 import java.util.function.LongPredicate;
 
-public class LongExpectation {
-	
-	public final LongExpectation to = this;
-	public final LongExpectation be = this;
-	public final LongExpectation been = this;
-	public final LongExpectation is = this;
-	public final LongExpectation that = this;
-	public final LongExpectation which = this;
-	public final LongExpectation and = this;
-	public final LongExpectation has = this;
-	public final LongExpectation have = this;
-	public final LongExpectation with = this;
-	public final LongExpectation at = this;
-	public final LongExpectation of = this;
-	public final LongExpectation same = this;
-	
-	private boolean notFlag = false;
+/**
+ * A {@code long} expectation offers all methods that are available on all
+ * numeric types - e.g. {@link #above(long)}, {@link #oneOf(long...)}
+ * etc., but also long-specific {@link #validInt()} alongside
+ * the general {@link #validByte()} and {@link #validShort()} methods.
+ */
+public class LongExpectation extends BaseExpectation<LongExpectation> {
 	
 	private final long my;
 	
-	public LongExpectation(long l) {
-		my = l;
-	}
 	
-	public LongExpectation(long l, String s) {
-		my = l;
-	}
-	
-	protected LongExpectation test(	boolean result,
-									String firstPart,
-									String secondPart) {
-		if(result ^ notFlag) {
-			return this;
-		}
-		throw new UnmetExpectationException(firstPart
-				+ (notFlag ? " not " : " ") + secondPart);
-	}
-	
-	//@formatter:off
 	/**
-	 * Negates the behaviour of any further expectations.
-	 * 
+	 * Constructs a new LongExpectation.
+	 *
 	 * <p>
-	 * E.g. while
-	 * 
-	 * <pre>expect(42L).to.equal(13L);</pre>
-	 * 
-	 * fails,
-	 * 
-	 * <pre>expect(42L).to.not().equal(13L);</pre>
-	 * 
-	 * succeeds.
-	 * 
-	 * @return the expectation itself for chaining
+	 * You should not use this constructor directly, but instead get
+	 * an expectation through {@link chaij.ChaiJ#expect(long)} or
+	 * {@link chaij.ChaiJ#expect(long, java.lang.String)}
+	 *
+	 * @param l the {@code long} that is used for all operations
+	 * @param s an optional custom expectation message.
 	 */
-	//@formatter:on
-	public LongExpectation not() {
-		this.notFlag = !notFlag;
-		return this;
+	LongExpectation(long l, String s) {
+		
+		my = l;
 	}
-	
 	
 	
 	/**
