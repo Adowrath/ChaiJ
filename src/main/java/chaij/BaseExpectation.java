@@ -120,12 +120,25 @@ public abstract class BaseExpectation<Exp extends BaseExpectation<Exp>> {
 							 String secondPart) {
 		
 		if(result == notFlag) {
-			 throw new UnmetExpectationException(firstPart + (notFlag ? " not " : " ") + secondPart));
+			signalError(new UnmetExpectationException(firstPart
+													  + (notFlag ? " not " : " ") + secondPart));
 		}
 		//noinspection unchecked
 		return (Exp) this;
 	}
 	
+	
+	/**
+	 * Signals an exception to the {@link chaij.ExceptionReporter} facility.
+	 *
+	 * @param exception the expectation that was not met, either containing a
+	 *                  description of the mismatch or, if any method called
+	 *                  during the test throws an exception, it wraps that method.
+	 */
+	private static void signalError(UnmetExpectationException exception) {
+		
+		ExceptionReporter.reportException(exception);
+	}
 	
 	//@formatter:off
 	/**
