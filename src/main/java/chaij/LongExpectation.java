@@ -28,6 +28,7 @@ public class LongExpectation extends BaseExpectation<LongExpectation> {
 	 */
 	LongExpectation(long l, String s) {
 		
+		super(s);
 		my = l;
 	}
 	

@@ -32,6 +32,7 @@ public final class DoubleExpectation extends BaseExpectation<DoubleExpectation> 
 	 */
 	DoubleExpectation(double d, String s) {
 		
+		super(s);
 		my = d;
 	}
 	

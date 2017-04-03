@@ -63,4 +63,26 @@ public class BaseExpectationTests {
 		
 		expectation.not().test(true, "This should fail.", "And it did!");
 	}
+	
+	
+	@Test
+	public void testWithExplicitMessage() {
+		
+		e.expect(UnmetExpectationException.class);
+		e.expectMessage("Custom message: This should fail. And it did!");
+		BaseExpectation<?> expectation = mock(BaseExpectation.class);
+		
+		expectation.test(false, "Custom message", "This should fail.", "And it did!");
+	}
+	
+	
+	@Test
+	public void testWithImplicitMessage() {
+		
+		e.expect(UnmetExpectationException.class);
+		e.expectMessage("Custom message: This should fail. And it did!");
+		BaseExpectation<?> expectation = new BaseExpectation("Custom message") {};
+		
+		expectation.test(false, "This should fail.", "And it did!");
+	}
 }

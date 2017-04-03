@@ -80,6 +80,20 @@ public abstract class BaseExpectation<Exp extends BaseExpectation<Exp>> {
 	
 	private boolean notFlag = false;
 	
+	private final String customText;
+	
+	
+	/**
+	 * Another constructor. There are so many!
+	 *
+	 * @param customText the custom text for this expectation,
+	 *                   or {@code null} if none is wished.
+	 */
+	protected BaseExpectation(String customText) {
+		
+		this.customText = customText;
+	}
+	
 	
 	/**
 	 * This is the central method that decides whether or not to let a test
@@ -119,9 +133,60 @@ public abstract class BaseExpectation<Exp extends BaseExpectation<Exp>> {
 							 String firstPart,
 							 String secondPart) {
 		
+		return test(result, customText, firstPart, secondPart);
+	}
+	
+	
+	/**
+	 * This is the central method that decides whether or not to let a test
+	 * pass based on the {@code result} and the current {@link #notFlag} value.
+	 *
+	 * <p>
+	 * Between the two string parts, either {@code " not "} or {@code " "} will be inserted
+	 * in case of failure, depending on the value of the {@linkplain #notFlag not} flag.
+	 *
+	 * <p>
+	 * An example usage of this might be the following:
+	 *
+	 * <div class="example"><pre>
+	 * public class TrueExpectation extends BaseExpectation{@code <TrueExpectation>} {
+	 *     public TrueExpectation testTrue(boolean actual) {
+	 *         return test(actual, "Custom message", "Expected a", "true value.");
+	 *     }
+	 * }
+	 *
+	 * TrueExpectation te = new TrueExpectation();
+	 * te.testTrue(true); // false would give "Custom message: Expected a true value."
+	 * te.not().testTrue(false); // true would give "Custom message: Expected a not true value."
+	 * </pre></div>
+	 *
+	 * @param result     the result of the test that called this method
+	 * @param message    a custom message that is prepended (if null,
+	 *                   nothing will be prepended, so you can also
+	 *                   use {@link #test(boolean, String, String)}
+	 * @param firstPart  the first part of the string, preferrably describing
+	 *                   or including the actual state
+	 * @param secondPart the second part of the string, preferrably describing
+	 *                   the expectation
+	 *
+	 * @return the Expectation object itself so it can be more easily used, see
+	 * above for an example
+	 *
+	 * @see #not()
+	 */
+	protected final Exp test(boolean result,
+							 String message,
+							 String firstPart,
+							 String secondPart) {
+		
 		if(result == notFlag) {
-			signalError(new UnmetExpectationException(firstPart
-													  + (notFlag ? " not " : " ") + secondPart));
+			signalError(
+					new UnmetExpectationException(
+														 (message == null ? "" : message + ": ")
+														 + firstPart
+														 + (notFlag ? " not " : " ")
+														 + secondPart
+					));
 		}
 		//noinspection unchecked
 		return (Exp) this;

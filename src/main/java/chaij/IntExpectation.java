@@ -28,6 +28,7 @@ public class IntExpectation extends BaseExpectation<IntExpectation> {
 	 */
 	IntExpectation(int i, String s) {
 		
+		super(s);
 		my = i;
 	}
 	

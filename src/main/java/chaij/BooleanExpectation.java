@@ -27,6 +27,7 @@ public final class BooleanExpectation extends BaseExpectation<BooleanExpectation
 	 */
 	BooleanExpectation(boolean my, String s) {
 		
+		super(s);
 		this.my = my;
 	}
 	
