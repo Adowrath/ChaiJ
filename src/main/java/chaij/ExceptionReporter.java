@@ -15,15 +15,40 @@ public final class ExceptionReporter {
 			EXCEPTIONS = ThreadLocal.withInitial(LinkedList::new);
 	
 	
+	/**
+	 * Man, you can't stop looking, can you? If you like it...
+	 */
 	private ExceptionReporter() {}
 	
 	
+	/**
+	 * Enables the catching of multiple
+	 * {@link chaij.UnmetExpectationException UnmetExpectationExceptions}.
+	 *
+	 * <p>
+	 * If you call this method directly, it is <strong>vital</strong>
+	 * that you call {@link #resetAndVerify()} afterwards, or
+	 * this <strong>will be leaked into global state!</strong>
+	 */
 	public static void enableMultiple() {
 		
 		USE_MULTIPLE.set(Boolean.TRUE);
 	}
 	
 	
+	/**
+	 * Resets the multiplicity state and checks for any caught exceptions.
+	 *
+	 * <p>
+	 * If there was no exception, nothing will be thrown.
+	 *
+	 * <p>
+	 * If there was one {@link chaij.UnmetExpectationException}, this method rethrows it.
+	 *
+	 * <p>
+	 * If there were two or more exceptions, they will be wrapped
+	 * inside a {@link MultipleException} exception.
+	 */
 	public static void resetAndVerify() {
 		
 		USE_MULTIPLE.set(Boolean.FALSE);
@@ -39,6 +64,12 @@ public final class ExceptionReporter {
 	}
 	
 	
+	/**
+	 * Reports an unmet expectation, either caching or rethrowing the exception
+	 * based on the current multiplicity for the thread.
+	 *
+	 * @param e the unmet expectation exception
+	 */
 	public static void reportException(UnmetExpectationException e) {
 		
 		Objects.requireNonNull(e);
@@ -50,6 +81,9 @@ public final class ExceptionReporter {
 	}
 	
 	
+	/**
+	 * Collects multiple exceptions.
+	 */
 	public static final class MultipleException extends RuntimeException {
 		
 		private static final long serialVersionUID = -1212008157115633368L;
@@ -57,6 +91,11 @@ public final class ExceptionReporter {
 		private final Collection<? extends Throwable> errors;
 		
 		
+		/**
+		 * Constructs a new exception. You probably shouldn't use this directly.
+		 *
+		 * @param errors the exceptions!
+		 */
 		public MultipleException(Collection<? extends Throwable> errors) {
 			
 			this.errors = new ArrayList<>(errors);
