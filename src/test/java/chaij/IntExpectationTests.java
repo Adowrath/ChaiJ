@@ -445,10 +445,24 @@ public class IntExpectationTests {
 		}
 		
 		
+		@Test(expected = UnmetExpectationException.class)
+		public void testWrongNegativeValidByte() {
+			
+			expect((int) Byte.MIN_VALUE - 1).validByte();
+		}
+		
+		
 		@Test
 		public void testNotValidByte() {
 			
 			expect((int) Byte.MAX_VALUE + 1).not().validByte();
+		}
+		
+		
+		@Test
+		public void testNotNegativeValidByte() {
+			
+			expect((int) Byte.MIN_VALUE - 1).not().validByte();
 		}
 		
 		
@@ -473,10 +487,24 @@ public class IntExpectationTests {
 		}
 		
 		
+		@Test(expected = UnmetExpectationException.class)
+		public void testWrongNegativeValidShort() {
+			
+			expect((int) Short.MIN_VALUE - 1).validShort();
+		}
+		
+		
 		@Test
 		public void testNotValidShort() {
 			
 			expect((int) Short.MAX_VALUE + 1).not().validShort();
+		}
+		
+		
+		@Test
+		public void testNotNegativeValidShort() {
+			
+			expect((int) Short.MIN_VALUE - 1).not().validShort();
 		}
 		
 		

@@ -451,11 +451,24 @@ public class LongExpectationTests {
 			expect((long) Integer.MAX_VALUE + 1L).validInt();
 		}
 		
+		@Test(expected = UnmetExpectationException.class)
+		public void testWrongNegativeValidInt() {
+			
+			expect((long) Integer.MIN_VALUE - 1L).validInt();
+		}
+		
 		
 		@Test
 		public void testNotValidInt() {
 			
 			expect((long) Integer.MAX_VALUE + 1L).not().validInt();
+		}
+		
+		
+		@Test
+		public void testNotNegativeValidInt() {
+			
+			expect((long) Integer.MIN_VALUE - 1L).not().validInt();
 		}
 		
 		
@@ -480,10 +493,24 @@ public class LongExpectationTests {
 		}
 		
 		
+		@Test(expected = UnmetExpectationException.class)
+		public void testWrongNegativeValidByte() {
+			
+			expect((long) Byte.MIN_VALUE - 1L).validByte();
+		}
+		
+		
 		@Test
 		public void testNotValidByte() {
 			
 			expect((long) Byte.MAX_VALUE + 1L).not().validByte();
+		}
+		
+		
+		@Test
+		public void testNotNegativeValidByte() {
+			
+			expect((long) Byte.MIN_VALUE - 1L).not().validByte();
 		}
 		
 		
@@ -508,10 +535,24 @@ public class LongExpectationTests {
 		}
 		
 		
+		@Test(expected = UnmetExpectationException.class)
+		public void testWrongNegativeValidShort() {
+			
+			expect((long) Short.MIN_VALUE - 1L).validShort();
+		}
+		
+		
 		@Test
 		public void testNotValidShort() {
 			
 			expect((long) Short.MAX_VALUE + 1L).not().validShort();
+		}
+		
+		
+		@Test
+		public void testNotNegativeValidShort() {
+			
+			expect((long) Short.MIN_VALUE - 1L).not().validShort();
 		}
 		
 		
