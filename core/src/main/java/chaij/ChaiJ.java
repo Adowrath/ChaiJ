@@ -9,8 +9,14 @@ public final class ChaiJ {
 	
 	/**
 	 * Don't instantiate.
+	 *
+	 * @throws java.lang.IllegalAccessException ....don't instantiate it.
 	 */
-	private ChaiJ() {}
+	private ChaiJ()
+			throws IllegalAccessException {
+		
+		throw new IllegalAccessException("Don't!");
+	}
 	
 	
 	/**

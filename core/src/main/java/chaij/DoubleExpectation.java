@@ -48,7 +48,27 @@ public final class DoubleExpectation extends BaseExpectation<DoubleExpectation> 
 	 */
 	public DoubleExpectation finite() {
 		
-		return test(Double.isFinite(my), "Expected " + my + " to",
+		return finite(null);
+	}
+	
+	
+	/**
+	 * Checks whether the {@code double} is finite, i.e. a real number
+	 * and neither {@link Double#POSITIVE_INFINITY},
+	 * {@link Double#NEGATIVE_INFINITY} nor {@link Double#NaN}
+	 * with a custom message.
+	 *
+	 * @param message a custom message specifically for this check
+	 *
+	 * @return the expectation itself for chaining
+	 *
+	 * @see Double#isFinite(double)
+	 */
+	public DoubleExpectation finite(String message) {
+		
+		return test(Double.isFinite(my),
+					message,
+					"Expected " + my + " to",
 					"be finite."
 		);
 	}
@@ -65,7 +85,27 @@ public final class DoubleExpectation extends BaseExpectation<DoubleExpectation> 
 	 */
 	public DoubleExpectation infinite() {
 		
-		return test(Double.isInfinite(my), "Expected " + my + " to",
+		return infinite(null);
+	}
+	
+	
+	/**
+	 * Checks whether the {@code double} is either
+	 * {@link Double#POSITIVE_INFINITY} or
+	 * {@link Double#NEGATIVE_INFINITY}
+	 * with a custom message.
+	 *
+	 * @param message a custom message specifically for this check
+	 *
+	 * @return the expectation itself for chaining
+	 *
+	 * @see Double#isInfinite(double)
+	 */
+	public DoubleExpectation infinite(String message) {
+		
+		return test(Double.isInfinite(my),
+					message,
+					"Expected " + my + " to",
 					"be infinite."
 		);
 	}
@@ -81,7 +121,28 @@ public final class DoubleExpectation extends BaseExpectation<DoubleExpectation> 
 	@SuppressWarnings("InstanceMethodNamingConvention")
 	public DoubleExpectation NaN() {
 		
-		return test(Double.isNaN(my), "Expected " + my + " to", "be NaN.");
+		return NaN(null);
+	}
+	
+	
+	/**
+	 * Checks whether the {@code double} is {@link Double#NaN}
+	 * with a custom message.
+	 *
+	 * @param message a custom message specifically for this check
+	 *
+	 * @return the expectation itself for chaining
+	 *
+	 * @see Double#isNaN(double)
+	 */
+	@SuppressWarnings("InstanceMethodNamingConvention")
+	public DoubleExpectation NaN(String message) {
+		
+		return test(Double.isNaN(my),
+					message,
+					"Expected " + my + " to",
+					"be NaN."
+		);
 	}
 	
 	
@@ -95,8 +156,25 @@ public final class DoubleExpectation extends BaseExpectation<DoubleExpectation> 
 	@SuppressWarnings("MisspelledEquals")
 	public DoubleExpectation equal(double expected) {
 		
+		return equal(expected, null);
+	}
+	
+	
+	/**
+	 * Checks whether the {@code double} is equal to {@code expected}
+	 * with a custom message.
+	 *
+	 * @param expected the other value that should be compared with
+	 * @param message  a custom message specifically for this check
+	 *
+	 * @return the expectation itself for chaining
+	 */
+	public DoubleExpectation equal(double expected, String message) {
+		
 		//noinspection FloatingPointEquality
-		return test(my == expected, "Expected " + my + " to",
+		return test(my == expected,
+					message,
+					"Expected " + my + " to",
 					"equal " + expected + '.'
 		);
 	}
@@ -111,15 +189,31 @@ public final class DoubleExpectation extends BaseExpectation<DoubleExpectation> 
 	 */
 	public DoubleExpectation above(double lowerBound) {
 		
-		return test(my > lowerBound, "Expected " + my + " to",
+		return above(lowerBound, null);
+	}
+	
+	
+	/**
+	 * Checks whether the {@code double} is above {@code upperBound}
+	 * with a custom message.
+	 *
+	 * @param lowerBound the biggest value that is too small
+	 * @param message    a custom message specifically for this check
+	 *
+	 * @return the expectation itself for chaining
+	 */
+	public DoubleExpectation above(double lowerBound, String message) {
+		
+		return test(my > lowerBound,
+					message,
+					"Expected " + my + " to",
 					"be above " + lowerBound + '.'
 		);
 	}
 	
 	
 	/**
-	 * Checks whether the {@code double} is at least
-	 * {@code upperBound}.
+	 * Checks whether the {@code double} is at least {@code upperBound}.
 	 *
 	 * @param lowerBound the smallest value that is allowed
 	 *
@@ -127,7 +221,24 @@ public final class DoubleExpectation extends BaseExpectation<DoubleExpectation> 
 	 */
 	public DoubleExpectation least(double lowerBound) {
 		
-		return test(my >= lowerBound, "Expected " + my + " to",
+		return least(lowerBound, null);
+	}
+	
+	
+	/**
+	 * Checks whether the {@code double} is at least {@code upperBound}
+	 * with a custom message.
+	 *
+	 * @param lowerBound the smallest value that is allowed
+	 * @param message    a custom message specifically for this check
+	 *
+	 * @return the expectation itself for chaining
+	 */
+	public DoubleExpectation least(double lowerBound, String message) {
+		
+		return test(my >= lowerBound,
+					message,
+					"Expected " + my + " to",
 					"be at least " + lowerBound + '.'
 		);
 	}
@@ -142,15 +253,31 @@ public final class DoubleExpectation extends BaseExpectation<DoubleExpectation> 
 	 */
 	public DoubleExpectation below(double upperBound) {
 		
-		return test(my < upperBound, "Expected " + my + " to",
+		return below(upperBound, null);
+	}
+	
+	
+	/**
+	 * Checks whether the {@code double} is below {@code upperBound}
+	 * with a custom message.
+	 *
+	 * @param upperBound the smallest value that is too big
+	 * @param message    a custom message specifically for this check
+	 *
+	 * @return the expectation itself for chaining
+	 */
+	public DoubleExpectation below(double upperBound, String message) {
+		
+		return test(my < upperBound,
+					message,
+					"Expected " + my + " to",
 					"be below " + upperBound + '.'
 		);
 	}
 	
 	
 	/**
-	 * Checks whether the {@code double} is at most
-	 * {@code upperBound}.
+	 * Checks whether the {@code double} is at most {@code upperBound}.
 	 *
 	 * @param upperBound the biggest value that is allowed
 	 *
@@ -158,7 +285,24 @@ public final class DoubleExpectation extends BaseExpectation<DoubleExpectation> 
 	 */
 	public DoubleExpectation most(double upperBound) {
 		
-		return test(my <= upperBound, "Expected " + my + " to",
+		return most(upperBound, null);
+	}
+	
+	
+	/**
+	 * Checks whether the {@code double} is at most {@code upperBound}
+	 * with a custom message.
+	 *
+	 * @param upperBound the biggest value that is allowed
+	 * @param message    a custom message specifically for this check
+	 *
+	 * @return the expectation itself for chaining
+	 */
+	public DoubleExpectation most(double upperBound, String message) {
+		
+		return test(my <= upperBound,
+					message,
+					"Expected " + my + " to",
 					"be at most " + upperBound + '.'
 		);
 	}
@@ -175,14 +319,32 @@ public final class DoubleExpectation extends BaseExpectation<DoubleExpectation> 
 	 */
 	public DoubleExpectation within(double min, double max) {
 		
-		return test(min <= my && my <= max, "Expected " + my + " to",
+		return within(min, max, null);
+	}
+	
+	
+	/**
+	 * Checks whether the {@code double} is within {@code min} and
+	 * {@code max}, both inclusive with a custom message.
+	 *
+	 * @param min     the minimum value
+	 * @param max     the maximum value
+	 * @param message a custom message specifically for this check
+	 *
+	 * @return the expectation itself for chaining
+	 */
+	public DoubleExpectation within(double min, double max, String message) {
+		
+		return test(min <= my && my <= max,
+					message,
+					"Expected " + my + " to",
 					"be within " + min + " and " + max + '.'
 		);
 	}
 	
 	
 	/**
-	 * Checks whether the {@code double} satisfies the given
+	 * Checks whether the {@code double} matches the given
 	 * {@code predicate}.
 	 *
 	 * @param predicate the predicate to check the {@code double} with
@@ -191,7 +353,24 @@ public final class DoubleExpectation extends BaseExpectation<DoubleExpectation> 
 	 */
 	public DoubleExpectation match(DoublePredicate predicate) {
 		
-		return test(predicate.test(my), "Expected " + my + " to",
+		return match(predicate, null);
+	}
+	
+	
+	/**
+	 * Checks whether the {@code double} matches the given
+	 * {@code predicate} with a custom message.
+	 *
+	 * @param predicate the predicate to check the {@code double} with
+	 * @param message   a custom message specifically for this check
+	 *
+	 * @return the expectation itself for chaining
+	 */
+	public DoubleExpectation match(DoublePredicate predicate, String message) {
+		
+		return test(predicate.test(my),
+					message,
+					"Expected " + my + " to",
 					"match a custom predicate."
 		);
 	}
@@ -207,7 +386,24 @@ public final class DoubleExpectation extends BaseExpectation<DoubleExpectation> 
 	 */
 	public DoubleExpectation satisfy(DoublePredicate predicate) {
 		
-		return test(predicate.test(my), "Expected " + my + " to",
+		return satisfy(predicate, null);
+	}
+	
+	
+	/**
+	 * Checks whether the {@code double} satisfies the given
+	 * {@code predicate} with a custom message.
+	 *
+	 * @param predicate the predicate to check the {@code double} with
+	 * @param message   a custom message specifically for this check
+	 *
+	 * @return the expectation itself for chaining
+	 */
+	public DoubleExpectation satisfy(DoublePredicate predicate, String message) {
+		
+		return test(predicate.test(my),
+					message,
+					"Expected " + my + " to",
 					"satisfy a custom predicate."
 		);
 	}
@@ -224,9 +420,26 @@ public final class DoubleExpectation extends BaseExpectation<DoubleExpectation> 
 	 */
 	public DoubleExpectation closeTo(double expected, double delta) {
 		
-		return test(Math.abs(my - expected) <= delta, "Expected " + my + " to",
-					"be close to " + expected + " with a delta of " + delta
-					+ '.'
+		return closeTo(expected, delta, null);
+	}
+	
+	
+	/**
+	 * Checks whether the {@code double} is close to {@code expected}
+	 * with a maximum distance of {@code delta} with a custom message.
+	 *
+	 * @param expected the expected value to which it should be close
+	 * @param delta    the maximum distance the two values can have
+	 * @param message  a custom message specifically for this check
+	 *
+	 * @return the expectation itself for chaining
+	 */
+	public DoubleExpectation closeTo(double expected, double delta, String message) {
+		
+		return test(Math.abs(my - expected) <= delta,
+					message,
+					"Expected " + my + " to",
+					"be close to " + expected + " with a delta of " + delta + '.'
 		);
 	}
 	
@@ -238,7 +451,27 @@ public final class DoubleExpectation extends BaseExpectation<DoubleExpectation> 
 	 *
 	 * @return the expectation itself for chaining
 	 */
+	@SuppressWarnings("OverloadedVarargsMethod")
 	public DoubleExpectation oneOf(double... arr) {
+		
+		return oneOf(null, arr);
+	}
+	
+	
+	/**
+	 * Checks whether the {@code double} is part of the array
+	 * with a custom message.
+	 *
+	 * <p>
+	 * Note the different order for the parameters!
+	 *
+	 * @param message a custom message specifically for this check
+	 * @param arr     the array of the possible values
+	 *
+	 * @return the expectation itself for chaining
+	 */
+	@SuppressWarnings("OverloadedVarargsMethod")
+	public DoubleExpectation oneOf(String message, double... arr) {
 		
 		boolean found = false;
 		int length = arr.length;
@@ -246,9 +479,10 @@ public final class DoubleExpectation extends BaseExpectation<DoubleExpectation> 
 			//noinspection FloatingPointEquality
 			found = arr[i] == my;
 		}
-		return test(found, "Expected " + my + " to",
+		return test(found,
+					message,
+					"Expected " + my + " to",
 					"be one of " + Arrays.toString(arr) + '.'
 		);
 	}
-	
 }

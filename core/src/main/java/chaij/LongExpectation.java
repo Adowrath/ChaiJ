@@ -43,7 +43,23 @@ public class LongExpectation extends BaseExpectation<LongExpectation> {
 	@SuppressWarnings("MisspelledEquals")
 	public LongExpectation equal(long expected) {
 		
-		return test(my == expected, "Expected " + my + " to",
+		return equal(expected, null);
+	}
+	
+	
+	/**
+	 * Checks whether the {@code long} is equal to {@code expected} with a custom message.
+	 *
+	 * @param expected the other value that should be compared with
+	 * @param message  a custom message specifically for this check
+	 *
+	 * @return the expectation itself for chaining
+	 */
+	public LongExpectation equal(long expected, String message) {
+		
+		return test(my == expected,
+					message,
+					"Expected " + my + " to",
 					"equal " + expected + '.'
 		);
 	}
@@ -58,7 +74,23 @@ public class LongExpectation extends BaseExpectation<LongExpectation> {
 	 */
 	public LongExpectation above(long lowerBound) {
 		
-		return test(my > lowerBound, "Expected " + my + " to",
+		return above(lowerBound, null);
+	}
+	
+	
+	/**
+	 * Checks whether the {@code long} is above {@code upperBound} with a custom message.
+	 *
+	 * @param lowerBound the biggest value that is too small
+	 * @param message    a custom message specifically for this check
+	 *
+	 * @return the expectation itself for chaining
+	 */
+	public LongExpectation above(long lowerBound, String message) {
+		
+		return test(my > lowerBound,
+					message,
+					"Expected " + my + " to",
 					"be above " + lowerBound + '.'
 		);
 	}
@@ -73,7 +105,23 @@ public class LongExpectation extends BaseExpectation<LongExpectation> {
 	 */
 	public LongExpectation least(long lowerBound) {
 		
-		return test(my >= lowerBound, "Expected " + my + " to",
+		return least(lowerBound, null);
+	}
+	
+	
+	/**
+	 * Checks whether the {@code long} is at least {@code upperBound} with a custom message.
+	 *
+	 * @param lowerBound the smallest value that is allowed
+	 * @param message    a custom message specifically for this check
+	 *
+	 * @return the expectation itself for chaining
+	 */
+	public LongExpectation least(long lowerBound, String message) {
+		
+		return test(my >= lowerBound,
+					message,
+					"Expected " + my + " to",
 					"be at least " + lowerBound + '.'
 		);
 	}
@@ -88,7 +136,23 @@ public class LongExpectation extends BaseExpectation<LongExpectation> {
 	 */
 	public LongExpectation below(long upperBound) {
 		
-		return test(my < upperBound, "Expected " + my + " to",
+		return below(upperBound, null);
+	}
+	
+	
+	/**
+	 * Checks whether the {@code long} is below {@code upperBound} with a custom message.
+	 *
+	 * @param upperBound the smallest value that is too big
+	 * @param message    a custom message specifically for this check
+	 *
+	 * @return the expectation itself for chaining
+	 */
+	public LongExpectation below(long upperBound, String message) {
+		
+		return test(my < upperBound,
+					message,
+					"Expected " + my + " to",
 					"be below " + upperBound + '.'
 		);
 	}
@@ -103,7 +167,23 @@ public class LongExpectation extends BaseExpectation<LongExpectation> {
 	 */
 	public LongExpectation most(long upperBound) {
 		
-		return test(my <= upperBound, "Expected " + my + " to",
+		return most(upperBound, null);
+	}
+	
+	
+	/**
+	 * Checks whether the {@code long} is at most {@code upperBound} with a custom message.
+	 *
+	 * @param upperBound the biggest value that is allowed
+	 * @param message    a custom message specifically for this check
+	 *
+	 * @return the expectation itself for chaining
+	 */
+	public LongExpectation most(long upperBound, String message) {
+		
+		return test(my <= upperBound,
+					message,
+					"Expected " + my + " to",
 					"be at most " + upperBound + '.'
 		);
 	}
@@ -120,7 +200,25 @@ public class LongExpectation extends BaseExpectation<LongExpectation> {
 	 */
 	public LongExpectation within(long min, long max) {
 		
-		return test(min <= my && my <= max, "Expected " + my + " to",
+		return within(min, max, null);
+	}
+	
+	
+	/**
+	 * Checks whether the {@code long} is within {@code min} and
+	 * {@code max}, both inclusive with a custom message.
+	 *
+	 * @param min     the minimum value
+	 * @param max     the maximum value
+	 * @param message a custom message specifically for this check
+	 *
+	 * @return the expectation itself for chaining
+	 */
+	public LongExpectation within(long min, long max, String message) {
+		
+		return test(min <= my && my <= max,
+					message,
+					"Expected " + my + " to",
 					"be within " + min + " and " + max + '.'
 		);
 	}
@@ -136,7 +234,24 @@ public class LongExpectation extends BaseExpectation<LongExpectation> {
 	 */
 	public LongExpectation match(LongPredicate predicate) {
 		
-		return test(predicate.test(my), "Expected " + my + " to",
+		return match(predicate, null);
+	}
+	
+	
+	/**
+	 * Checks whether the {@code long} satisfies the given
+	 * {@code predicate} with a custom message.
+	 *
+	 * @param predicate the predicate to check the {@code long} with
+	 * @param message   a custom message specifically for this check
+	 *
+	 * @return the expectation itself for chaining
+	 */
+	public LongExpectation match(LongPredicate predicate, String message) {
+		
+		return test(predicate.test(my),
+					message,
+					"Expected " + my + " to",
 					"match a custom predicate."
 		);
 	}
@@ -152,7 +267,24 @@ public class LongExpectation extends BaseExpectation<LongExpectation> {
 	 */
 	public LongExpectation satisfy(LongPredicate predicate) {
 		
-		return test(predicate.test(my), "Expected " + my + " to",
+		return satisfy(predicate, null);
+	}
+	
+	
+	/**
+	 * Checks whether the {@code long} satisfies the given
+	 * {@code predicate} with a custom message.
+	 *
+	 * @param predicate the predicate to check the {@code long} with
+	 * @param message   a custom message specifically for this check
+	 *
+	 * @return the expectation itself for chaining
+	 */
+	public LongExpectation satisfy(LongPredicate predicate, String message) {
+		
+		return test(predicate.test(my),
+					message,
+					"Expected " + my + " to",
 					"satisfy a custom predicate."
 		);
 	}
@@ -169,9 +301,26 @@ public class LongExpectation extends BaseExpectation<LongExpectation> {
 	 */
 	public LongExpectation closeTo(long expected, long delta) {
 		
-		return test(Math.abs(my - expected) <= delta, "Expected " + my + " to",
-					"be close to " + expected + " with a delta of " + delta
-					+ '.'
+		return closeTo(expected, delta, null);
+	}
+	
+	
+	/**
+	 * Checks whether the {@code long} is close to {@code expected}
+	 * with a maximum distance of {@code delta} with a custom message.
+	 *
+	 * @param expected the expected value to which it should be close
+	 * @param delta    the maximum distance the two values can have
+	 * @param message  a custom message specifically for this check
+	 *
+	 * @return the expectation itself for chaining
+	 */
+	public LongExpectation closeTo(long expected, long delta, String message) {
+		
+		return test(Math.abs(my - expected) <= delta,
+					message,
+					"Expected " + my + " to",
+					"be close to " + expected + " with a delta of " + delta + '.'
 		);
 	}
 	
@@ -183,14 +332,32 @@ public class LongExpectation extends BaseExpectation<LongExpectation> {
 	 *
 	 * @return the expectation itself for chaining
 	 */
+	@SuppressWarnings("OverloadedVarargsMethod")
 	public LongExpectation oneOf(long... arr) {
+		
+		return oneOf(null, arr);
+	}
+	
+	
+	/**
+	 * Checks whether the {@code long} is part of the array with a custom message.
+	 *
+	 * @param message a custom message specifically for this check
+	 * @param arr     the array of the possible values
+	 *
+	 * @return the expectation itself for chaining
+	 */
+	@SuppressWarnings("OverloadedVarargsMethod")
+	public LongExpectation oneOf(String message, long... arr) {
 		
 		boolean found = false;
 		long length = arr.length;
 		for(int i = 0; i < length && !found; ++i) {
 			found = arr[i] == my;
 		}
-		return test(found, "Expected " + my + " to",
+		return test(found,
+					message,
+					"Expected " + my + " to",
 					"be one of " + Arrays.toString(arr) + '.'
 		);
 	}
@@ -204,10 +371,25 @@ public class LongExpectation extends BaseExpectation<LongExpectation> {
 	 */
 	public LongExpectation validByte() {
 		
-		return test(Byte.MIN_VALUE <= my && my <= Byte.MAX_VALUE,
-					"Expected " + my + " to", " be a valid byte value."
-		);
+		return validByte(null);
+	}
+	
+	
+	/**
+	 * Checks whether the {@code long} represents a valid {@code byte}
+	 * value with a custom message.
+	 *
+	 * @param message a custom message specifically for this check
+	 *
+	 * @return the expectation itself for chaining
+	 */
+	public LongExpectation validByte(String message) {
 		
+		return test(Byte.MIN_VALUE <= my && my <= Byte.MAX_VALUE,
+					message,
+					"Expected " + my + " to",
+					"be a valid byte value."
+		);
 	}
 	
 	
@@ -219,10 +401,25 @@ public class LongExpectation extends BaseExpectation<LongExpectation> {
 	 */
 	public LongExpectation validShort() {
 		
-		return test(Short.MIN_VALUE <= my && my <= Short.MAX_VALUE,
-					"Expected " + my + " to", " be a valid short value."
-		);
+		return validShort(null);
+	}
+	
+	
+	/**
+	 * Checks whether the {@code long} represents a valid {@code short}
+	 * value with a custom message.
+	 *
+	 * @param message a custom message specifically for this check
+	 *
+	 * @return the expectation itself for chaining
+	 */
+	public LongExpectation validShort(String message) {
 		
+		return test(Short.MIN_VALUE <= my && my <= Short.MAX_VALUE,
+					message,
+					"Expected " + my + " to",
+					"be a valid short value."
+		);
 	}
 	
 	
@@ -234,9 +431,24 @@ public class LongExpectation extends BaseExpectation<LongExpectation> {
 	 */
 	public LongExpectation validInt() {
 		
-		return test(Integer.MIN_VALUE <= my && my <= Integer.MAX_VALUE,
-					"Expected " + my + " to", " be a valid short value."
-		);
+		return validInt(null);
 	}
 	
+	
+	/**
+	 * Checks whether the {@code long} represents a valid {@code int}
+	 * value with a custom message.
+	 *
+	 * @param message a custom message specifically for this check
+	 *
+	 * @return the expectation itself for chaining
+	 */
+	public LongExpectation validInt(String message) {
+		
+		return test(Integer.MIN_VALUE <= my && my <= Integer.MAX_VALUE,
+					message,
+					"Expected " + my + " to",
+					"be a valid integer value."
+		);
+	}
 }

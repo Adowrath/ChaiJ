@@ -17,8 +17,14 @@ public final class ExceptionReporter {
 	
 	/**
 	 * Man, you can't stop looking, can you? If you like it...
+	 *
+	 * @throws java.lang.IllegalAccessException ....don't instantiate it.
 	 */
-	private ExceptionReporter() {}
+	private ExceptionReporter()
+			throws IllegalAccessException {
+		
+		throw new IllegalAccessException("Don't!");
+	}
 	
 	
 	/**

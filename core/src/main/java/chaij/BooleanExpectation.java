@@ -41,7 +41,23 @@ public final class BooleanExpectation extends BaseExpectation<BooleanExpectation
 	 */
 	public BooleanExpectation ok() {
 		
-		return test(my, "Expected a", "ok-ish boolean.");
+		return ok(null);
+	}
+	
+	
+	/**
+	 * Checks whether the {@code boolean} is {@code true}
+	 * with a custom message.
+	 *
+	 * @param message a custom message specifically for this check
+	 *
+	 * @return the expectation itself for chaining
+	 *
+	 * @see #_true()
+	 */
+	public BooleanExpectation ok(String message) {
+		
+		return test(my, message, "Expected a", "ok-ish boolean.");
 	}
 	
 	
@@ -55,7 +71,24 @@ public final class BooleanExpectation extends BaseExpectation<BooleanExpectation
 	@SuppressWarnings("InstanceMethodNamingConvention")
 	public BooleanExpectation _true() {
 		
-		return test(my, "Expected a", "true boolean.");
+		return _true(null);
+	}
+	
+	
+	/**
+	 * Checks whether the {@code boolean} is {@code true}
+	 * with a custom message.
+	 *
+	 * @param message a custom message specifically for this check
+	 *
+	 * @return the expectation itself for chaining
+	 *
+	 * @see #ok()
+	 */
+	@SuppressWarnings("InstanceMethodNamingConvention")
+	public BooleanExpectation _true(String message) {
+		
+		return test(my, message, "Expected a", "true boolean.");
 	}
 	
 	
@@ -67,12 +100,27 @@ public final class BooleanExpectation extends BaseExpectation<BooleanExpectation
 	@SuppressWarnings("InstanceMethodNamingConvention")
 	public BooleanExpectation _false() {
 		
-		return test(!my, "Expected a", "false boolean.");
+		return _false(null);
 	}
 	
 	
 	/**
-	 * Checks whether the {@code boolean} is equal to {@code boolean}.
+	 * Checks whether the {@code boolean} is {@code false}
+	 * with a custom message.
+	 *
+	 * @param message a custom message specifically for this check
+	 *
+	 * @return the expectation itself for chaining
+	 */
+	@SuppressWarnings("InstanceMethodNamingConvention")
+	public BooleanExpectation _false(String message) {
+		
+		return test(!my, message, "Expected a", "false boolean.");
+	}
+	
+	
+	/**
+	 * Checks whether the {@code boolean} is equal to the given {@code boolean}.
 	 *
 	 * @param expected the other value that should be compared with
 	 *
@@ -85,7 +133,28 @@ public final class BooleanExpectation extends BaseExpectation<BooleanExpectation
 	@SuppressWarnings("MisspelledEquals")
 	public BooleanExpectation equal(boolean expected) {
 		
-		return test(my == expected, "Expected " + my + " to",
+		return equal(expected, null);
+	}
+	
+	
+	/**
+	 * Checks whether the {@code boolean} is equal to the given {@code boolean}
+	 * with a custom message.
+	 *
+	 * @param expected the other value that should be compared with
+	 * @param message  a custom message specifically for this check
+	 *
+	 * @return the expectation itself for chaining
+	 *
+	 * @see #_false()
+	 * @see #_true()
+	 * @see #ok()
+	 */
+	public BooleanExpectation equal(boolean expected, String message) {
+		
+		return test(my == expected,
+					message,
+					"Expected " + my + " to",
 					"equal " + expected + '.'
 		);
 	}

@@ -1,8 +1,10 @@
 package chaij;
 
 
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 
 import static chaij.ChaiJ.expect;
@@ -512,6 +514,238 @@ public class IntExpectationTests {
 		public void testWrongNotValidShort() {
 			
 			expect((int) Short.MAX_VALUE).not().validShort();
+		}
+	}
+	
+	
+	public static class MessageTests {
+		
+		@Rule
+		public ExpectedException e = ExpectedException.none();
+		
+		
+		@Test
+		public void testStandardTest() {
+			
+			e.expect(UnmetExpectationException.class);
+			e.expectMessage("Special: Custom message.");
+			expect(42, "Special").test(false, "Custom", "message.");
+		}
+		
+		
+		@Test
+		public void testEqual() {
+			
+			e.expect(UnmetExpectationException.class);
+			e.expectMessage("Expected 42 to equal 43.");
+			expect(42).equal(43);
+		}
+		
+		
+		@Test
+		public void testEqualWithMessage() {
+			
+			e.expect(UnmetExpectationException.class);
+			e.expectMessage("Custom: Expected 42 to equal 43.");
+			expect(42).equal(43, "Custom");
+		}
+		
+		
+		@Test
+		public void testAbove() {
+			
+			e.expect(UnmetExpectationException.class);
+			e.expectMessage("Expected 42 to be above 43.");
+			expect(42).above(43);
+		}
+		
+		
+		@Test
+		public void testAboveWithMessage() {
+			
+			e.expect(UnmetExpectationException.class);
+			e.expectMessage("Custom: Expected 42 to be above 43.");
+			expect(42).above(43, "Custom");
+		}
+		
+		
+		@Test
+		public void testLeast() {
+			
+			e.expect(UnmetExpectationException.class);
+			e.expectMessage("Expected 42 to be at least 43.");
+			expect(42).least(43);
+		}
+		
+		
+		@Test
+		public void testLeastWithMessage() {
+			
+			e.expect(UnmetExpectationException.class);
+			e.expectMessage("Custom: Expected 42 to be at least 43.");
+			expect(42).least(43, "Custom");
+		}
+		
+		
+		@Test
+		public void testBelow() {
+			
+			e.expect(UnmetExpectationException.class);
+			e.expectMessage("Expected 42 to be below 41.");
+			expect(42).below(41);
+		}
+		
+		
+		@Test
+		public void testBelowWithMessage() {
+			
+			e.expect(UnmetExpectationException.class);
+			e.expectMessage("Custom: Expected 42 to be below 41.");
+			expect(42).below(41, "Custom");
+		}
+		
+		
+		@Test
+		public void testMost() {
+			
+			e.expect(UnmetExpectationException.class);
+			e.expectMessage("Expected 42 to be at most 41.");
+			expect(42).most(41);
+		}
+		
+		
+		@Test
+		public void testMostWithMessage() {
+			
+			e.expect(UnmetExpectationException.class);
+			e.expectMessage("Custom: Expected 42 to be at most 41.");
+			expect(42).most(41, "Custom");
+		}
+		
+		
+		@Test
+		public void testWithin() {
+			
+			e.expect(UnmetExpectationException.class);
+			e.expectMessage("Expected 42 to be within 43 and 43.");
+			expect(42).within(43, 43);
+		}
+		
+		
+		@Test
+		public void testWithinWithMessage() {
+			
+			e.expect(UnmetExpectationException.class);
+			e.expectMessage("Custom: Expected 42 to be within 43 and 43.");
+			expect(42).within(43, 43, "Custom");
+		}
+		
+		
+		@Test
+		public void testMatch() {
+			
+			e.expect(UnmetExpectationException.class);
+			e.expectMessage("Expected 42 to match a custom predicate.");
+			expect(42).match(i -> false);
+		}
+		
+		
+		@Test
+		public void testMatchWithMessage() {
+			
+			e.expect(UnmetExpectationException.class);
+			e.expectMessage("Custom: Expected 42 to match a custom predicate.");
+			expect(42).match(i -> false, "Custom");
+		}
+		
+		
+		@Test
+		public void testSatisfy() {
+			
+			e.expect(UnmetExpectationException.class);
+			e.expectMessage("Expected 42 to satisfy a custom predicate.");
+			expect(42).satisfy(i -> false);
+		}
+		
+		
+		@Test
+		public void testSatisfyWithMessage() {
+			
+			e.expect(UnmetExpectationException.class);
+			e.expectMessage("Custom: Expected 42 to satisfy a custom predicate.");
+			expect(42).satisfy(i -> false, "Custom");
+		}
+		
+		
+		@Test
+		public void testCloseTo() {
+			
+			e.expect(UnmetExpectationException.class);
+			e.expectMessage("Expected 42 to be close to 43 with a delta of 0.");
+			expect(42).closeTo(43, 0);
+		}
+		
+		
+		@Test
+		public void testCloseToWithMessage() {
+			
+			e.expect(UnmetExpectationException.class);
+			e.expectMessage("Custom: Expected 42 to be close to 43 with a delta of 0.");
+			expect(42).closeTo(43, 0, "Custom");
+		}
+		
+		
+		@Test
+		public void testOneOf() {
+			
+			e.expect(UnmetExpectationException.class);
+			e.expectMessage("Expected 42 to be one of [41, 43].");
+			expect(42).oneOf(41, 43);
+		}
+		
+		
+		@Test
+		public void testOneOfWithMessage() {
+			
+			e.expect(UnmetExpectationException.class);
+			e.expectMessage("Custom: Expected 42 to be one of [41, 43].");
+			expect(42).oneOf("Custom", 41, 43);
+		}
+		
+		
+		@Test
+		public void testValidByte() {
+			
+			e.expect(UnmetExpectationException.class);
+			e.expectMessage("Expected 128 to be a valid byte value.");
+			expect(Byte.MAX_VALUE + 1).validByte();
+		}
+		
+		
+		@Test
+		public void testValidByteWithMessage() {
+			
+			e.expect(UnmetExpectationException.class);
+			e.expectMessage("Custom: Expected 128 to be a valid byte value.");
+			expect(Byte.MAX_VALUE + 1).validByte("Custom");
+		}
+		
+		
+		@Test
+		public void testValidShort() {
+			
+			e.expect(UnmetExpectationException.class);
+			e.expectMessage("Expected 32768 to be a valid short value.");
+			expect(Short.MAX_VALUE + 1).validShort();
+		}
+		
+		
+		@Test
+		public void testValidShortWithMessage() {
+			
+			e.expect(UnmetExpectationException.class);
+			e.expectMessage("Custom: Expected 32768 to be a valid short value.");
+			expect(Short.MAX_VALUE + 1).validShort("Custom");
 		}
 	}
 }
