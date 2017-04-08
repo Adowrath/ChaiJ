@@ -1,6 +1,8 @@
 package chaij;
 
 
+import chaij.function.UnreliableRunnable;
+
 import java.util.*;
 
 /**
@@ -11,7 +13,7 @@ public final class ExceptionReporter {
 	private static final ThreadLocal<Boolean>
 			USE_MULTIPLE = ThreadLocal.withInitial(() -> Boolean.FALSE);
 	
-	private static final ThreadLocal<List<UnmetExpectationException>>
+	private static final ThreadLocal<List<ChaiJException>>
 			EXCEPTIONS = ThreadLocal.withInitial(LinkedList::new);
 	
 	
@@ -29,14 +31,14 @@ public final class ExceptionReporter {
 	
 	/**
 	 * Enables the catching of multiple
-	 * {@link chaij.UnmetExpectationException UnmetExpectationExceptions}.
+	 * {@link chaij.ChaiJException ChaiJExceptions}.
 	 *
 	 * <p>
 	 * If you call this method directly, it is <strong>vital</strong>
 	 * that you call {@link #resetAndVerify()} afterwards, or
 	 * this <strong>will be leaked into global state!</strong>
 	 */
-	public static void enableMultiple() {
+	private static void enableMultiple() {
 		
 		USE_MULTIPLE.set(Boolean.TRUE);
 	}
@@ -55,10 +57,10 @@ public final class ExceptionReporter {
 	 * If there were two or more exceptions, they will be wrapped
 	 * inside a {@link MultipleException} exception.
 	 */
-	public static void resetAndVerify() {
+	private static void resetAndVerify() {
 		
 		USE_MULTIPLE.set(Boolean.FALSE);
-		List<UnmetExpectationException> errors = new LinkedList<>(EXCEPTIONS.get());
+		List<ChaiJException> errors = new LinkedList<>(EXCEPTIONS.get());
 		EXCEPTIONS.remove();
 		if(!errors.isEmpty()) {
 			if(errors.size() == 1) {
@@ -71,12 +73,14 @@ public final class ExceptionReporter {
 	
 	
 	/**
-	 * Reports an unmet expectation, either caching or rethrowing the exception
+	 * Reports an exception, either caching or rethrowing the exception
 	 * based on the current multiplicity for the thread.
 	 *
-	 * @param e the unmet expectation exception
+	 * @param e the exception that occured, either an
+	 *          {@link chaij.UnmetExpectationException} or a
+	 *          {@link chaij.WrappedCheckedException}
 	 */
-	public static void reportException(UnmetExpectationException e) {
+	public static void reportException(ChaiJException e) {
 		
 		Objects.requireNonNull(e);
 		if(USE_MULTIPLE.get()) {
@@ -84,6 +88,25 @@ public final class ExceptionReporter {
 		} else {
 			throw e;
 		}
+	}
+	
+	
+	/**
+	 * Runs the given code safely while expecting multiple reported exceptions.
+	 *
+	 * @param r the runnable that may also throw any exceptions.
+	 *          Use {@link chaij.function.UnreliableRunnable#fromRunnable(Runnable)}
+	 *          for converting a normal runnable.
+	 */
+	public static void runMultipleAndReport(UnreliableRunnable r) {
+		
+		enableMultiple();
+		try {
+			r.run();
+		} catch (Throwable t) {
+			reportException(new WrappedCheckedException(t));
+		}
+		resetAndVerify();
 	}
 	
 	
@@ -112,8 +135,18 @@ public final class ExceptionReporter {
 		public String getMessage() {
 			
 			StringBuilder sb = new StringBuilder(String.format("There were %d errors:", errors.size()));
-			for(Throwable e : errors) {
-				sb.append(String.format("%n  %s(%s)", e.getClass().getName(), e.getMessage()));
+			for(Throwable error : errors) {
+				if(error.getCause() != null) {
+					Throwable cause = error.getCause();
+					sb.append(String.format("%n - %s(%s) with cause%n    %s(%s)",
+											error.getClass().getName(), error.getMessage(),
+											cause.getClass().getName(), cause.getMessage()
+					));
+				} else {
+					sb.append(String.format("%n - %s(%s)",
+											error.getClass().getName(), error.getMessage()
+					));
+				}
 			}
 			return sb.toString();
 		}

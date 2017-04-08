@@ -76,8 +76,8 @@ public class MultipleExpectationsTest {
 		TestRule me = MultipleExpectations.all();
 		ex.expect(MultipleException.class);
 		ex.expectMessage(String.format("There were 2 errors:%n" +
-									   "  chaij.UnmetExpectationException(Expected a ok-ish boolean.)%n" +
-									   "  chaij.UnmetExpectationException(Expected 2 to be above 3.)"));
+									   " - chaij.UnmetExpectationException(Expected a ok-ish boolean.)%n" +
+									   " - chaij.UnmetExpectationException(Expected 2 to be above 3.)"));
 		
 		me.apply(new Statement() {
 			@Override
@@ -148,8 +148,8 @@ public class MultipleExpectationsTest {
 		TestRule me = MultipleExpectations.none();
 		ex.expect(MultipleException.class);
 		ex.expectMessage(String.format("There were 2 errors:%n" +
-									   "  chaij.UnmetExpectationException(Expected a ok-ish boolean.)%n" +
-									   "  chaij.UnmetExpectationException(Expected 2 to be above 3.)"));
+									   " - chaij.UnmetExpectationException(Expected a ok-ish boolean.)%n" +
+									   " - chaij.UnmetExpectationException(Expected 2 to be above 3.)"));
 		
 		me.apply(new Statement() {
 					 @Override
@@ -174,8 +174,8 @@ public class MultipleExpectationsTest {
 		TestRule me = MultipleExpectations.all();
 		ex.expect(MultipleException.class);
 		ex.expectMessage(String.format("There were 2 errors:%n" +
-									   "  chaij.UnmetExpectationException(Expected a ok-ish boolean.)%n" +
-									   "  chaij.UnmetExpectationException(Expected 2 to be above 3.)"));
+									   " - chaij.UnmetExpectationException(Expected a ok-ish boolean.)%n" +
+									   " - chaij.UnmetExpectationException(Expected 2 to be above 3.)"));
 		
 		me.apply(new Statement() {
 					 @Override

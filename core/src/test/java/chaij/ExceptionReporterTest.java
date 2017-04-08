@@ -6,6 +6,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import static chaij.ExceptionReporter.reportException;
+import static chaij.ExceptionReporter.runMultipleAndReport;
+
 public class ExceptionReporterTest {
 	
 	@Rule
@@ -16,8 +19,26 @@ public class ExceptionReporterTest {
 	@Test
 	public void testEmptyReport() {
 		
-		ExceptionReporter.resetAndVerify();
+		runMultipleAndReport(() -> {
+			// nothing happens!
+		});
 		
+	}
+	
+	
+	@Test
+	public void testCaughtException() {
+		
+		e.expect(MultipleException.class);
+		e.expectMessage(String.format("There were 2 errors:%n" +
+									  " - chaij.UnmetExpectationException(Some normal error 1!)%n" +
+									  " - chaij.WrappedCheckedException(java.lang.RuntimeException: Abnormal! HELP!) with cause%n" +
+									  "    java.lang.RuntimeException(Abnormal! HELP!)"));
+		
+		runMultipleAndReport(() -> {
+			reportException(new UnmetExpectationException("Some normal error 1!"));
+			throw new RuntimeException("Abnormal! HELP!");
+		});
 	}
 	
 	
@@ -27,35 +48,34 @@ public class ExceptionReporterTest {
 		e.expect(UnmetExpectationException.class);
 		e.expectMessage("Some error!");
 		
-		ExceptionReporter.reportException(new UnmetExpectationException("Some error!"));
+		reportException(new UnmetExpectationException("Some error!"));
 	}
 	
 	
 	@Test
 	public void testSingleMultipleReport() {
 		
-		ExceptionReporter.enableMultiple();
-		ExceptionReporter.reportException(new UnmetExpectationException("Some error!"));
-		
-		e.expect(UnmetExpectationException.class);
-		e.expectMessage("Some error!");
-		
-		ExceptionReporter.resetAndVerify();
+		runMultipleAndReport(() -> {
+			reportException(new UnmetExpectationException("Some error!"));
+			
+			e.expect(UnmetExpectationException.class);
+			e.expectMessage("Some error!");
+		});
 	}
 	
 	
 	@Test
 	public void testTwoMultipleReport() {
 		
-		ExceptionReporter.enableMultiple();
-		ExceptionReporter.reportException(new UnmetExpectationException("Some error 1!"));
-		ExceptionReporter.reportException(new UnmetExpectationException("Some error 2!"));
-		
-		e.expect(MultipleException.class);
-		e.expectMessage(String.format("There were 2 errors:%n" +
-									  "  chaij.UnmetExpectationException(Some error 1!)%n" +
-									  "  chaij.UnmetExpectationException(Some error 2!)"));
-		
-		ExceptionReporter.resetAndVerify();
+		runMultipleAndReport(() -> {
+			reportException(new UnmetExpectationException("Some error 1!"));
+			reportException(new UnmetExpectationException("Some error 2!"));
+			
+			e.expect(MultipleException.class);
+			e.expectMessage(String.format("There were 2 errors:%n" +
+										  " - chaij.UnmetExpectationException(Some error 1!)%n" +
+										  " - chaij.UnmetExpectationException(Some error 2!)"));
+			
+		});
 	}
 }

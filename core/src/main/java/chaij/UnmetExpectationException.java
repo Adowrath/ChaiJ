@@ -5,7 +5,7 @@ package chaij;
  * If an expectation does not hold, this exception will be thrown
  * or cached, depending on the reporting method.
  */
-public class UnmetExpectationException extends RuntimeException {
+public class UnmetExpectationException extends ChaiJException {
 	
 	private static final long serialVersionUID = -7752693081656017911L;
 	

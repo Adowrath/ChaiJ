@@ -5,6 +5,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.sameInstance;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 
 @SuppressWarnings("JUnitTestMethodWithNoAssertions")
@@ -84,5 +87,21 @@ public class BaseExpectationTests {
 		BaseExpectation<?> expectation = new BaseExpectation("Custom message") {};
 		
 		expectation.test(false, "This should fail.", "And it did!");
+	}
+	
+	@Test
+	public void testBehaviourOnContinueAfterFail() {
+
+		BaseExpectation<?> expectation = new BaseExpectation(null) {};
+		e.expect(UnmetExpectationException.class);
+		e.expectMessage("Meh. Why?!");
+		
+		ExceptionReporter.runMultipleAndReport(() -> {
+			BaseExpectation<?> other = expectation.test(false, "Meh.", "Why?!");
+			
+			assertThat("The expectation should be returned.",
+					   expectation,
+					   is(sameInstance(other)));
+		});
 	}
 }

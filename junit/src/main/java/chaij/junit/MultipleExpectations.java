@@ -47,11 +47,10 @@ public final class MultipleExpectations implements TestRule {
 	
 	@Override
 	@SuppressWarnings("ReturnOfInnerClass")
-	public Statement apply(Statement base, Description description) {
+	public Statement apply(Statement statement, Description description) {
 		
 		return new Statement() {
 			@Override
-			@SuppressWarnings({"ProhibitedExceptionDeclared", "PrivateMemberAccessBetweenOuterAndInnerClass"})
 			public void evaluate()
 					throws Throwable {
 				
@@ -59,11 +58,9 @@ public final class MultipleExpectations implements TestRule {
 				   description.getAnnotation(SingleExpectation.class) == null :
 				   description.getAnnotation(MultipleExpectation.class) != null) {
 					
-					ExceptionReporter.enableMultiple();
-					base.evaluate();
-					ExceptionReporter.resetAndVerify();
+					ExceptionReporter.runMultipleAndReport(statement::evaluate);
 				} else {
-					base.evaluate();
+					statement.evaluate();
 				}
 			}
 		};
