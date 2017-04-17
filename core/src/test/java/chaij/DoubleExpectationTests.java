@@ -8,129 +8,9 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 
 import static chaij.ChaiJ.expect;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 
 @RunWith(Enclosed.class)
 public class DoubleExpectationTests {
-	
-	public static class GeneralContractTests {
-		
-		@Test
-		public void testLanguageChains() {
-			
-			DoubleExpectation expect = expect(42.0D);
-			
-			DoubleExpectation other = expect.to.be.been.is.that.which.and.has.have.with.at.of.same;
-			
-			assertThat("After every language chain, the object stays the same.",
-					   other, is(equalTo(expect))
-			);
-		}
-		
-		
-		@Test
-		public void testNot() {
-			
-			expect(42.0D).not();
-		}
-		
-		
-		@Test
-		public void testFinite() {
-			
-			expect(42.0D).finite();
-		}
-		
-		
-		@Test
-		public void testInfinite() {
-			
-			expect(Double.POSITIVE_INFINITY).infinite();
-		}
-		
-		
-		@Test
-		public void testNaN() {
-			
-			expect(Double.NaN).NaN();
-		}
-		
-		
-		@Test
-		public void testEqual() {
-			
-			expect(42.0D).equal(42.0D);
-		}
-		
-		
-		@Test
-		public void testAbove() {
-			
-			expect(42.0D).above(41.0D);
-		}
-		
-		
-		@Test
-		public void testLeast() {
-			
-			expect(42.0D).least(42.0D);
-		}
-		
-		
-		@Test
-		public void testBelow() {
-			
-			expect(42.0D).below(43.0D);
-		}
-		
-		
-		@Test
-		public void testMost() {
-			
-			expect(42.0D).most(42.0D);
-		}
-		
-		
-		@Test
-		public void testWithin() {
-			
-			expect(42.0D).within(42.0D, 42.0D);
-		}
-		
-		
-		@Test
-		public void testMatch() {
-			
-			//noinspection FloatingPointEquality
-			expect(42.0D).match(d -> d == 42.0D);
-		}
-		
-		
-		@Test
-		public void testSatisfy() {
-			
-			//noinspection FloatingPointEquality
-			expect(42.0D).satisfy(d -> d == 42.0D);
-		}
-		
-		
-		@Test
-		public void testCloseTo() {
-			
-			expect(42.0D).closeTo(42.0D, 0);
-		}
-		
-		
-		@Test
-		public void testOneOf() {
-			
-			expect(42.0D).oneOf(42.0D);
-		}
-		
-	}
-	
 	
 	public static class NormalTests {
 		
@@ -149,20 +29,6 @@ public class DoubleExpectationTests {
 		
 		
 		@Test
-		public void testNotFinite() {
-			
-			expect(Double.POSITIVE_INFINITY).not().finite();
-		}
-		
-		
-		@Test(expected = UnmetExpectationException.class)
-		public void testWrongNotFinite() {
-			
-			expect(42.0D).not().finite();
-		}
-		
-		
-		@Test
 		public void testInfinite() {
 			
 			expect(Double.POSITIVE_INFINITY).infinite();
@@ -173,20 +39,6 @@ public class DoubleExpectationTests {
 		public void testWrongInfinite() {
 			
 			expect(42.0D).infinite();
-		}
-		
-		
-		@Test
-		public void testNotInfinite() {
-			
-			expect(42.0D).not().infinite();
-		}
-		
-		
-		@Test(expected = UnmetExpectationException.class)
-		public void testWrongNotInfinite() {
-			
-			expect(Double.POSITIVE_INFINITY).not().infinite();
 		}
 		
 		
@@ -205,20 +57,6 @@ public class DoubleExpectationTests {
 		
 		
 		@Test
-		public void testNotNaN() {
-			
-			expect(42.0D).not().NaN();
-		}
-		
-		
-		@Test(expected = UnmetExpectationException.class)
-		public void testWrongNotNaN() {
-			
-			expect(Double.NaN).not().NaN();
-		}
-		
-		
-		@Test
 		public void testEqual() {
 			
 			expect(42.0D).equal(42.0D);
@@ -229,20 +67,6 @@ public class DoubleExpectationTests {
 		public void testWrongEqual() {
 			
 			expect(42.0D).equal(43.0D);
-		}
-		
-		
-		@Test
-		public void testNotEqual() {
-			
-			expect(42.0D).not().equal(43.0D);
-		}
-		
-		
-		@Test(expected = UnmetExpectationException.class)
-		public void testWrongNotEqual() {
-			
-			expect(42.0D).not().equal(42.0D);
 		}
 		
 		
@@ -261,20 +85,6 @@ public class DoubleExpectationTests {
 		
 		
 		@Test
-		public void testNotAbove() {
-			
-			expect(42.0D).not().above(42.0D);
-		}
-		
-		
-		@Test(expected = UnmetExpectationException.class)
-		public void testWrongNotAbove() {
-			
-			expect(42.0D).not().above(41.0D);
-		}
-		
-		
-		@Test
 		public void testLeast() {
 			
 			expect(42.0D).least(42.0D);
@@ -285,20 +95,6 @@ public class DoubleExpectationTests {
 		public void testWrongLeast() {
 			
 			expect(42.0D).least(43.0D);
-		}
-		
-		
-		@Test
-		public void testNotLeast() {
-			
-			expect(42.0D).not().least(43.0D);
-		}
-		
-		
-		@Test(expected = UnmetExpectationException.class)
-		public void testWrongNotLeast() {
-			
-			expect(42.0D).not().least(42.0D);
 		}
 		
 		
@@ -317,20 +113,6 @@ public class DoubleExpectationTests {
 		
 		
 		@Test
-		public void testNotBelow() {
-			
-			expect(42.0D).not().below(42.0D);
-		}
-		
-		
-		@Test(expected = UnmetExpectationException.class)
-		public void testWrongNotBelow() {
-			
-			expect(42.0D).not().below(43.0D);
-		}
-		
-		
-		@Test
 		public void testMost() {
 			
 			expect(42.0D).most(42.0D);
@@ -341,20 +123,6 @@ public class DoubleExpectationTests {
 		public void testWrongMost() {
 			
 			expect(42.0D).most(41.0D);
-		}
-		
-		
-		@Test
-		public void testNotMost() {
-			
-			expect(42.0D).not().most(41.0D);
-		}
-		
-		
-		@Test(expected = UnmetExpectationException.class)
-		public void testWrongNotMost() {
-			
-			expect(42.0D).not().most(42.0D);
 		}
 		
 		
@@ -387,27 +155,6 @@ public class DoubleExpectationTests {
 		
 		
 		@Test
-		public void testNotWithinSmaller() {
-			
-			expect(42.0D).not().within(41.0D, 41.0D);
-		}
-		
-		
-		@Test
-		public void testNotWithinBigger() {
-			
-			expect(42.0D).not().within(43.0D, 43.0D);
-		}
-		
-		
-		@Test(expected = UnmetExpectationException.class)
-		public void testWrongNotWithin() {
-			
-			expect(42.0D).not().within(41.0D, 43.0D);
-		}
-		
-		
-		@Test
 		public void testMatch() {
 			
 			//noinspection FloatingPointEquality
@@ -424,22 +171,6 @@ public class DoubleExpectationTests {
 		
 		
 		@Test
-		public void testNotMatch() {
-			
-			//noinspection FloatingPointEquality
-			expect(42.0D).not().match(d -> d == 43.0D);
-		}
-		
-		
-		@Test(expected = UnmetExpectationException.class)
-		public void testWrongNotMatch() {
-			
-			//noinspection FloatingPointEquality
-			expect(42.0D).not().match(d -> d == 42.0D);
-		}
-		
-		
-		@Test
 		public void testSatisfy() {
 			
 			//noinspection FloatingPointEquality
@@ -452,22 +183,6 @@ public class DoubleExpectationTests {
 			
 			//noinspection FloatingPointEquality
 			expect(42.0D).satisfy(d -> d == 43.0D);
-		}
-		
-		
-		@Test
-		public void testNotSatisfy() {
-			
-			//noinspection FloatingPointEquality
-			expect(42.0D).not().satisfy(d -> d == 43.0D);
-		}
-		
-		
-		@Test(expected = UnmetExpectationException.class)
-		public void testWrongNotSatisfy() {
-			
-			//noinspection FloatingPointEquality
-			expect(42.0D).not().satisfy(d -> d == 42.0D);
 		}
 		
 		
@@ -493,20 +208,6 @@ public class DoubleExpectationTests {
 		
 		
 		@Test
-		public void testNotCloseTo() {
-			
-			expect(42.0D).not().closeTo(41.0D, 0);
-		}
-		
-		
-		@Test(expected = UnmetExpectationException.class)
-		public void testWrongNotCloseTo() {
-			
-			expect(42.0D).not().closeTo(42.0D, 0);
-		}
-		
-		
-		@Test
 		public void testOneOf() {
 			
 			expect(42.0D).oneOf(41.0D, 42.0D, 43.0D);
@@ -518,20 +219,6 @@ public class DoubleExpectationTests {
 			
 			expect(42.0D).oneOf(41.0D, 43.0D);
 		}
-		
-		
-		@Test
-		public void testNotOneOf() {
-			
-			expect(42.0D).not().oneOf(41.0D, 43.0D);
-		}
-		
-		
-		@Test(expected = UnmetExpectationException.class)
-		public void testWrongNotOneOf() {
-			
-			expect(42.0D).not().oneOf(41.0D, 42.0D, 43.0D);
-		}
 	}
 	
 	
@@ -542,11 +229,11 @@ public class DoubleExpectationTests {
 		
 		
 		@Test
-		public void testStandardTest() {
+		public void testStandard() {
 			
 			e.expect(UnmetExpectationException.class);
-			e.expectMessage("Special: Custom message.");
-			expect(42.0D, "Special").test(false, "Custom", "message.");
+			e.expectMessage("Special: Expected 42.0 to equal 43.0.");
+			expect(42.0, "Special").equal(43.0);
 		}
 		
 		

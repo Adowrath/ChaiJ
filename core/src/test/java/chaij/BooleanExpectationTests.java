@@ -8,61 +8,9 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 
 import static chaij.ChaiJ.expect;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 
 @RunWith(Enclosed.class)
 public class BooleanExpectationTests {
-	
-	public static class GeneralContractTests {
-		
-		@Test
-		public void testLanguageChains() {
-			
-			BooleanExpectation expect = expect(true);
-			
-			BooleanExpectation other = expect.to.be.been.is.that.which.and.has.have.with.at.of.same;
-			
-			assertThat("After every language chain, the object stays the same.", other, is(equalTo(expect)));
-		}
-		
-		
-		@Test
-		public void testNot() {
-			
-			expect(true).not();
-		}
-		
-		
-		@Test
-		public void testOk() {
-			
-			expect(true).ok();
-		}
-		
-		
-		@Test
-		public void testTrue() {
-			
-			expect(true)._true();
-		}
-		
-		
-		@Test
-		public void testFalse() {
-			
-			expect(false)._false();
-		}
-		
-		
-		@Test
-		public void testEquals() {
-			
-			expect(true).equal(true);
-		}
-	}
-	
 	
 	public static class NormalTests {
 		
@@ -82,20 +30,6 @@ public class BooleanExpectationTests {
 		
 		
 		@Test
-		public void testNotOk() {
-			
-			expect(false).not().ok();
-		}
-		
-		
-		@Test(expected = UnmetExpectationException.class)
-		public void testWrongNotOk() {
-			
-			expect(true).not().ok();
-		}
-		
-		
-		@Test
 		public void testTrue() {
 			
 			expect(true)._true();
@@ -106,20 +40,6 @@ public class BooleanExpectationTests {
 		public void testWrongTrue() {
 			
 			expect(false)._true();
-		}
-		
-		
-		@Test
-		public void testNotTrue() {
-			
-			expect(false).not()._true();
-		}
-		
-		
-		@Test(expected = UnmetExpectationException.class)
-		public void testWrongNotTrue() {
-			
-			expect(true).not()._true();
 		}
 		
 		
@@ -138,20 +58,6 @@ public class BooleanExpectationTests {
 		
 		
 		@Test
-		public void testNotFalse() {
-			
-			expect(true).not()._false();
-		}
-		
-		
-		@Test(expected = UnmetExpectationException.class)
-		public void testWrongNotFalse() {
-			
-			expect(false).not()._false();
-		}
-		
-		
-		@Test
 		public void testEquals() {
 			
 			expect(true).equal(true);
@@ -163,20 +69,6 @@ public class BooleanExpectationTests {
 			
 			expect(false).equal(true);
 		}
-		
-		
-		@Test
-		public void testNotEquals() {
-			
-			expect(false).not().equal(true);
-		}
-		
-		
-		@Test(expected = UnmetExpectationException.class)
-		public void testWrongNotEquals() {
-			
-			expect(true).not().equal(true);
-		}
 	}
 	
 	
@@ -187,11 +79,11 @@ public class BooleanExpectationTests {
 		
 		
 		@Test
-		public void testStandardTest() {
+		public void testStandard() {
 			
 			e.expect(UnmetExpectationException.class);
-			e.expectMessage("Special: Custom message.");
-			expect(true, "Special").test(false, "Custom", "message.");
+			e.expectMessage("Special: Expected true to equal false.");
+			expect(true, "Special").equal(false);
 		}
 		
 		

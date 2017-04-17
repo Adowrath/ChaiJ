@@ -89,9 +89,10 @@ public class BaseExpectationTests {
 		expectation.test(false, "This should fail.", "And it did!");
 	}
 	
+	
 	@Test
 	public void testBehaviourOnContinueAfterFail() {
-
+		
 		BaseExpectation<?> expectation = new BaseExpectation(null) {};
 		e.expect(UnmetExpectationException.class);
 		e.expectMessage("Meh. Why?!");
@@ -101,7 +102,8 @@ public class BaseExpectationTests {
 			
 			assertThat("The expectation should be returned.",
 					   expectation,
-					   is(sameInstance(other)));
+					   is(sameInstance(other))
+			);
 		});
 	}
 }

@@ -182,7 +182,11 @@ public abstract class BaseExpectation<Exp extends BaseExpectation<Exp>> {
 		if(result == notFlag) {
 			signalError(
 					new UnmetExpectationException(
-														 (message == null ? "" : message + ": ")
+														 (message == null ?
+														  customText == null ?
+														  "" :
+														  customText + ": " :
+														  message + ": ")
 														 + firstPart
 														 + (notFlag ? " not " : " ")
 														 + secondPart

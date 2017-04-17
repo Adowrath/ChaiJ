@@ -29,14 +29,15 @@ public class ExceptionReporterTest {
 	@Test
 	public void testCaughtException() {
 		
-		e.expect(MultipleException.class);
-		e.expectMessage(String.format("There were 2 errors:%n" +
-									  " - chaij.UnmetExpectationException(Some normal error 1!)%n" +
-									  " - chaij.WrappedCheckedException(java.lang.RuntimeException: Abnormal! HELP!) with cause%n" +
-									  "    java.lang.RuntimeException(Abnormal! HELP!)"));
-		
 		runMultipleAndReport(() -> {
 			reportException(new UnmetExpectationException("Some normal error 1!"));
+			
+			e.expect(MultipleException.class);
+			e.expectMessage(String.format("There were 2 errors:%n" +
+										  " - chaij.UnmetExpectationException(Some normal error 1!)%n" +
+										  " - chaij.WrappedCheckedException(java.lang.RuntimeException: Abnormal! HELP!) with cause%n" +
+										  "    java.lang.RuntimeException(Abnormal! HELP!)"));
+			
 			throw new RuntimeException("Abnormal! HELP!");
 		});
 	}
