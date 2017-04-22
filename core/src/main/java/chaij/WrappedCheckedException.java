@@ -1,6 +1,9 @@
 package chaij;
 
 
+/**
+ * Generic wrapper for any checked exception so that no other method has to declare them.
+ */
 public class WrappedCheckedException extends ChaiJException {
 	
 	

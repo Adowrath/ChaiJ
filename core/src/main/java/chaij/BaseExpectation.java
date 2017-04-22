@@ -1,6 +1,8 @@
 package chaij;
 
 
+import java.util.function.Supplier;
+
 /**
  * The base class for all expectations, providing essential methods
  * such as {@link #test(boolean, String, String)} and the {@link #not()} toggle
@@ -133,7 +135,7 @@ public abstract class BaseExpectation<Exp extends BaseExpectation<Exp>> {
 							 String firstPart,
 							 String secondPart) {
 		
-		return test(result, customText, firstPart, secondPart);
+		return test(result, null, firstPart, () -> secondPart);
 	}
 	
 	
@@ -179,6 +181,58 @@ public abstract class BaseExpectation<Exp extends BaseExpectation<Exp>> {
 							 String firstPart,
 							 String secondPart) {
 		
+		return test(result, message, firstPart, () -> secondPart);
+	}
+	
+	
+	/**
+	 * This is the central method that decides whether or not to let a test
+	 * pass based on the {@code result} and the current {@link #notFlag} value.
+	 *
+	 * <p>
+	 * Between the two string parts, either {@code " not "} or {@code " "} will be inserted
+	 * in case of failure, depending on the value of the {@linkplain #notFlag not} flag.
+	 *
+	 * <p>
+	 * The specialty of this method is that, compared to the others, the second string
+	 * can be passed as a lambda, thus supporting the usecase of there being an expensive
+	 * computation in constructing the second string part that is of course not needed
+	 * if the test is successful.
+	 *
+	 * <p>
+	 * An example usage of this might be the following:
+	 *
+	 * <div class="example"><pre>
+	 * public class TrueExpectation extends BaseExpectation{@code <TrueExpectation>} {
+	 *     public TrueExpectation testTrue(boolean actual) {
+	 *         return test(actual, "Custom message", "Expected a",
+	 *                     (){@literal ->} expensiveCalculation() + " value.");
+	 *     }
+	 * }
+	 *
+	 * TrueExpectation te = new TrueExpectation();
+	 * te.testTrue(true); // false would give "Custom message: Expected a [expensive calc result here] value."
+	 * te.not().testTrue(false); // true would give "Custom message: Expected a not [expensive calc result here] value."
+	 * </pre></div>
+	 *
+	 * @param result     the result of the test that called this method
+	 * @param message    a custom message that is prepended (if null,
+	 *                   nothing will be prepended, so you can also
+	 *                   use {@link #test(boolean, String, String)}
+	 * @param firstPart  the first part of the string, preferrably describing
+	 *                   or including the actual state
+	 * @param secondPart the second part of the string, preferrably describing
+	 *                   the expectation, passed as a {@link java.util.function.Supplier}
+	 *
+	 * @return the Expectation object itself so it can be more easily used, see
+	 * above for an example
+	 *
+	 * @see #not()
+	 */
+	protected final Exp test(boolean result,
+							 String message,
+							 String firstPart,
+							 Supplier<String> secondPart) {
 		if(result == notFlag) {
 			signalError(
 					new UnmetExpectationException(
@@ -189,7 +243,7 @@ public abstract class BaseExpectation<Exp extends BaseExpectation<Exp>> {
 														  message + ": ")
 														 + firstPart
 														 + (notFlag ? " not " : " ")
-														 + secondPart
+														 + secondPart.get()
 					));
 		}
 		//noinspection unchecked

@@ -80,6 +80,17 @@ public class BaseExpectationTests {
 	
 	
 	@Test
+	public void testWithSecondPartSupplier() {
+		
+		e.expect(UnmetExpectationException.class);
+		e.expectMessage("Custom message: This should fail. And it did!");
+		BaseExpectation<?> expectation = mock(BaseExpectation.class);
+		
+		expectation.test(false, "Custom message", "This should fail.", () -> "And it did!");
+	}
+	
+	
+	@Test
 	public void testWithImplicitMessage() {
 		
 		e.expect(UnmetExpectationException.class);

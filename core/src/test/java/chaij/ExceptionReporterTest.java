@@ -22,7 +22,6 @@ public class ExceptionReporterTest {
 		runMultipleAndReport(() -> {
 			// nothing happens!
 		});
-		
 	}
 	
 	
@@ -50,6 +49,26 @@ public class ExceptionReporterTest {
 		e.expectMessage("Some error!");
 		
 		reportException(new UnmetExpectationException("Some error!"));
+	}
+	
+	
+	private volatile Throwable thrownException = null;
+	
+	
+	@Test
+	public void testSingleReportInOtherThread()
+			throws Throwable {
+		
+		e.expect(UnmetExpectationException.class);
+		e.expectMessage("Some error!");
+		
+		Thread t = new Thread(() -> reportException(new UnmetExpectationException("Some error!")));
+		t.setUncaughtExceptionHandler((t1, e1) -> thrownException = e1);
+		t.start();
+		t.join();
+		if(thrownException != null) {
+			throw thrownException;
+		}
 	}
 	
 	

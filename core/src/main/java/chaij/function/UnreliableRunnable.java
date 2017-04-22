@@ -3,6 +3,10 @@ package chaij.function;
 
 /**
  * This is an alternative to {@link java.lang.Runnable} that can also throw exceptions.
+ *
+ * <p>
+ * If you have a normal Runnable {@code r}, you can "convert" it to an {@code UnreliableRunnable}
+ * through either {@code r::run} or {@code () -> r.run()}.
  */
 @FunctionalInterface
 public interface UnreliableRunnable {
@@ -14,16 +18,4 @@ public interface UnreliableRunnable {
 	 */
 	void run()
 			throws Throwable;
-	
-	/**
-	 * Converts a regular Runnable as an alternative to {@code () -> r.run();}
-	 *
-	 * @param r the runnable
-	 *
-	 * @return an unreliable runnable
-	 */
-	static UnreliableRunnable fromRunnable(Runnable r) {
-		
-		return r::run;
-	}
 }
