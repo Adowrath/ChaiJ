@@ -7,6 +7,8 @@ import java.util.*;
 
 /**
  * This utility class enables the usage of multiple exceptions in one unit test.
+ *
+ * @since 0.0.1
  */
 public final class ExceptionReporter {
 	
@@ -32,11 +34,6 @@ public final class ExceptionReporter {
 	/**
 	 * Enables the catching of multiple
 	 * {@link chaij.ChaiJException ChaiJExceptions}.
-	 *
-	 * <p>
-	 * If you call this method directly, it is <strong>vital</strong>
-	 * that you call {@link #resetAndVerify()} afterwards, or
-	 * this <strong>will be leaked into global state!</strong>
 	 */
 	private static void enableMultiple() {
 		
@@ -60,7 +57,7 @@ public final class ExceptionReporter {
 	private static void resetAndVerify() {
 		
 		USE_MULTIPLE.set(Boolean.FALSE);
-		List<ChaiJException> errors = new LinkedList<>(EXCEPTIONS.get());
+		List<ChaiJException> errors = EXCEPTIONS.get();
 		EXCEPTIONS.remove();
 		if(!errors.isEmpty()) {
 			if(errors.size() == 1) {
@@ -76,14 +73,14 @@ public final class ExceptionReporter {
 	 * Reports an exception, either caching or rethrowing the exception
 	 * based on the current multiplicity for the thread.
 	 *
-	 * @param e the exception that occured, either an
+	 * @param e the exception that occurred, either an
 	 *          {@link chaij.UnmetExpectationException} or a
 	 *          {@link chaij.WrappedCheckedException}
 	 */
 	public static void reportException(ChaiJException e) {
 		
 		Objects.requireNonNull(e);
-		if(USE_MULTIPLE.get()) {
+		if(USE_MULTIPLE.get().booleanValue()) {
 			EXCEPTIONS.get().add(e);
 		} else {
 			throw e;
@@ -95,8 +92,6 @@ public final class ExceptionReporter {
 	 * Runs the given code safely while expecting multiple reported exceptions.
 	 *
 	 * @param r the runnable that may also throw any exceptions.
-	 *          Use {@link chaij.function.UnreliableRunnable#fromRunnable(Runnable)}
-	 *          for converting a normal runnable.
 	 */
 	public static void runMultipleAndReport(UnreliableRunnable r) {
 		
@@ -139,12 +134,12 @@ public final class ExceptionReporter {
 				if(error.getCause() != null) {
 					Throwable cause = error.getCause();
 					sb.append(String.format("%n - %s(%s) with cause%n    %s(%s)",
-											error.getClass().getName(), error.getMessage(),
-											cause.getClass().getName(), cause.getMessage()
+					                        error.getClass().getName(), error.getMessage(),
+					                        cause.getClass().getName(), cause.getMessage()
 					));
 				} else {
 					sb.append(String.format("%n - %s(%s)",
-											error.getClass().getName(), error.getMessage()
+					                        error.getClass().getName(), error.getMessage()
 					));
 				}
 			}

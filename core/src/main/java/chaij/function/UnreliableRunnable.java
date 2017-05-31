@@ -7,7 +7,10 @@ package chaij.function;
  * <p>
  * If you have a normal Runnable {@code r}, you can "convert" it to an {@code UnreliableRunnable}
  * through either {@code r::run} or {@code () -> r.run()}.
+ *
+ * @since 0.1.0
  */
+@SuppressWarnings("ProhibitedExceptionDeclared")
 @FunctionalInterface
 public interface UnreliableRunnable {
 	

@@ -13,6 +13,8 @@ import java.util.function.DoublePredicate;
  * <p>
  * Note that there is no special expectation for {@code float} values because
  * there always exists a promotion from {@code float} to {@code double}.
+ *
+ * @since 0.0.1
  */
 public final class DoubleExpectation extends BaseExpectation<DoubleExpectation> {
 	
@@ -67,9 +69,9 @@ public final class DoubleExpectation extends BaseExpectation<DoubleExpectation> 
 	public DoubleExpectation finite(String message) {
 		
 		return test(Double.isFinite(my),
-					message,
-					"Expected " + my + " to",
-					"be finite."
+		            message,
+		            "Expected " + my + " to",
+		            "be finite."
 		);
 	}
 	
@@ -104,9 +106,9 @@ public final class DoubleExpectation extends BaseExpectation<DoubleExpectation> 
 	public DoubleExpectation infinite(String message) {
 		
 		return test(Double.isInfinite(my),
-					message,
-					"Expected " + my + " to",
-					"be infinite."
+		            message,
+		            "Expected " + my + " to",
+		            "be infinite."
 		);
 	}
 	
@@ -139,9 +141,9 @@ public final class DoubleExpectation extends BaseExpectation<DoubleExpectation> 
 	public DoubleExpectation NaN(String message) {
 		
 		return test(Double.isNaN(my),
-					message,
-					"Expected " + my + " to",
-					"be NaN."
+		            message,
+		            "Expected " + my + " to",
+		            "be NaN."
 		);
 	}
 	
@@ -173,9 +175,9 @@ public final class DoubleExpectation extends BaseExpectation<DoubleExpectation> 
 		
 		//noinspection FloatingPointEquality
 		return test(my == expected,
-					message,
-					"Expected " + my + " to",
-					"equal " + expected + '.'
+		            message,
+		            "Expected " + my + " to",
+		            "equal " + expected + '.'
 		);
 	}
 	
@@ -205,9 +207,9 @@ public final class DoubleExpectation extends BaseExpectation<DoubleExpectation> 
 	public DoubleExpectation above(double lowerBound, String message) {
 		
 		return test(my > lowerBound,
-					message,
-					"Expected " + my + " to",
-					"be above " + lowerBound + '.'
+		            message,
+		            "Expected " + my + " to",
+		            "be above " + lowerBound + '.'
 		);
 	}
 	
@@ -237,9 +239,9 @@ public final class DoubleExpectation extends BaseExpectation<DoubleExpectation> 
 	public DoubleExpectation least(double lowerBound, String message) {
 		
 		return test(my >= lowerBound,
-					message,
-					"Expected " + my + " to",
-					"be at least " + lowerBound + '.'
+		            message,
+		            "Expected " + my + " to",
+		            "be at least " + lowerBound + '.'
 		);
 	}
 	
@@ -269,9 +271,9 @@ public final class DoubleExpectation extends BaseExpectation<DoubleExpectation> 
 	public DoubleExpectation below(double upperBound, String message) {
 		
 		return test(my < upperBound,
-					message,
-					"Expected " + my + " to",
-					"be below " + upperBound + '.'
+		            message,
+		            "Expected " + my + " to",
+		            "be below " + upperBound + '.'
 		);
 	}
 	
@@ -301,9 +303,9 @@ public final class DoubleExpectation extends BaseExpectation<DoubleExpectation> 
 	public DoubleExpectation most(double upperBound, String message) {
 		
 		return test(my <= upperBound,
-					message,
-					"Expected " + my + " to",
-					"be at most " + upperBound + '.'
+		            message,
+		            "Expected " + my + " to",
+		            "be at most " + upperBound + '.'
 		);
 	}
 	
@@ -335,10 +337,10 @@ public final class DoubleExpectation extends BaseExpectation<DoubleExpectation> 
 	 */
 	public DoubleExpectation within(double min, double max, String message) {
 		
-		return test(min <= my && my <= max,
-					message,
-					"Expected " + my + " to",
-					"be within " + min + " and " + max + '.'
+		return test((min <= my) && (my <= max),
+		            message,
+		            "Expected " + my + " to",
+		            "be within " + min + " and " + max + '.'
 		);
 	}
 	
@@ -369,9 +371,9 @@ public final class DoubleExpectation extends BaseExpectation<DoubleExpectation> 
 	public DoubleExpectation match(DoublePredicate predicate, String message) {
 		
 		return test(predicate.test(my),
-					message,
-					"Expected " + my + " to",
-					"match a custom predicate."
+		            message,
+		            "Expected " + my + " to",
+		            "match a custom predicate."
 		);
 	}
 	
@@ -402,9 +404,9 @@ public final class DoubleExpectation extends BaseExpectation<DoubleExpectation> 
 	public DoubleExpectation satisfy(DoublePredicate predicate, String message) {
 		
 		return test(predicate.test(my),
-					message,
-					"Expected " + my + " to",
-					"satisfy a custom predicate."
+		            message,
+		            "Expected " + my + " to",
+		            "satisfy a custom predicate."
 		);
 	}
 	
@@ -437,9 +439,9 @@ public final class DoubleExpectation extends BaseExpectation<DoubleExpectation> 
 	public DoubleExpectation closeTo(double expected, double delta, String message) {
 		
 		return test(Math.abs(my - expected) <= delta,
-					message,
-					"Expected " + my + " to",
-					"be close to " + expected + " with a delta of " + delta + '.'
+		            message,
+		            "Expected " + my + " to",
+		            "be close to " + expected + " with a delta of " + delta + '.'
 		);
 	}
 	
@@ -475,14 +477,23 @@ public final class DoubleExpectation extends BaseExpectation<DoubleExpectation> 
 		
 		boolean found = false;
 		int length = arr.length;
-		for(int i = 0; i < length && !found; ++i) {
+		for(int i = 0; (i < length) && !found; ++i) {
 			//noinspection FloatingPointEquality
 			found = arr[i] == my;
 		}
 		return test(found,
-					message,
-					"Expected " + my + " to",
-					"be one of " + Arrays.toString(arr) + '.'
+		            message,
+		            "Expected " + my + " to",
+		            "be one of " + Arrays.toString(arr) + '.'
+		);
+	}
+	
+	
+	@Override
+	public String toString() {
+		
+		return String.format("DoubleExpectation(value=%f, customText=%s)",
+		                     my, customText
 		);
 	}
 }

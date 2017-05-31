@@ -14,7 +14,6 @@ public class BooleanExpectationTests {
 	
 	public static class NormalTests {
 		
-		
 		@Test
 		public void testOk() {
 			
@@ -75,7 +74,7 @@ public class BooleanExpectationTests {
 	public static class MessageTests {
 		
 		@Rule
-		public ExpectedException e = ExpectedException.none();
+		public final ExpectedException e = ExpectedException.none();
 		
 		
 		@Test

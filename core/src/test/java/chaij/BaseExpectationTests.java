@@ -14,7 +14,19 @@ import static org.mockito.Mockito.mock;
 public class BaseExpectationTests {
 	
 	@Rule
-	public ExpectedException e = ExpectedException.none();
+	public final ExpectedException e = ExpectedException.none();
+	
+	
+	@Test
+	public void testLinkers() {
+		
+		BaseExpectation<?> expectation = new DummyExpectation(null);
+		
+		assertThat("Linkers should not return a different object.",
+		           expectation.to.be.been.is.that.which.and.has.have.with.at.of.same,
+		           is(sameInstance(expectation))
+		);
+	}
 	
 	
 	@Test
@@ -95,7 +107,7 @@ public class BaseExpectationTests {
 		
 		e.expect(UnmetExpectationException.class);
 		e.expectMessage("Custom message: This should fail. And it did!");
-		BaseExpectation<?> expectation = new BaseExpectation("Custom message") {};
+		BaseExpectation<?> expectation = new DummyExpectation("Custom message");
 		
 		expectation.test(false, "This should fail.", "And it did!");
 	}
@@ -104,7 +116,7 @@ public class BaseExpectationTests {
 	@Test
 	public void testBehaviourOnContinueAfterFail() {
 		
-		BaseExpectation<?> expectation = new BaseExpectation(null) {};
+		BaseExpectation<?> expectation = new DummyExpectation(null);
 		e.expect(UnmetExpectationException.class);
 		e.expectMessage("Meh. Why?!");
 		
@@ -112,9 +124,15 @@ public class BaseExpectationTests {
 			BaseExpectation<?> other = expectation.test(false, "Meh.", "Why?!");
 			
 			assertThat("The expectation should be returned.",
-					   expectation,
-					   is(sameInstance(other))
+			           expectation,
+			           is(sameInstance(other))
 			);
 		});
+	}
+	
+	
+	private static final class DummyExpectation extends BaseExpectation<DummyExpectation> {
+		
+		DummyExpectation(String msg) {super(msg);}
 	}
 }

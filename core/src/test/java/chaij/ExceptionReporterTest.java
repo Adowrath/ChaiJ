@@ -33,11 +33,11 @@ public class ExceptionReporterTest {
 			
 			e.expect(MultipleException.class);
 			e.expectMessage(String.format("There were 2 errors:%n" +
-										  " - chaij.UnmetExpectationException(Some normal error 1!)%n" +
-										  " - chaij.WrappedCheckedException(java.lang.RuntimeException: Abnormal! HELP!) with cause%n" +
-										  "    java.lang.RuntimeException(Abnormal! HELP!)"));
+			                              " - chaij.UnmetExpectationException(Some normal error 1!)%n" +
+			                              " - chaij.WrappedCheckedException(java.lang.Throwable: Abnormal! HELP!) with cause%n" +
+			                              "    java.lang.Throwable(Abnormal! HELP!)"));
 			
-			throw new RuntimeException("Abnormal! HELP!");
+			throw new Throwable("Abnormal! HELP!");
 		});
 	}
 	
@@ -93,8 +93,8 @@ public class ExceptionReporterTest {
 			
 			e.expect(MultipleException.class);
 			e.expectMessage(String.format("There were 2 errors:%n" +
-										  " - chaij.UnmetExpectationException(Some error 1!)%n" +
-										  " - chaij.UnmetExpectationException(Some error 2!)"));
+			                              " - chaij.UnmetExpectationException(Some error 1!)%n" +
+			                              " - chaij.UnmetExpectationException(Some error 2!)"));
 			
 		});
 	}

@@ -9,8 +9,10 @@ import java.util.function.LongPredicate;
  * numeric types - e.g. {@link #above(long)}, {@link #oneOf(long...)}
  * etc., but also long-specific {@link #validInt()} alongside
  * the general {@link #validByte()} and {@link #validShort()} methods.
+ *
+ * @since 0.0.1
  */
-public class LongExpectation extends BaseExpectation<LongExpectation> {
+public final class LongExpectation extends BaseExpectation<LongExpectation> {
 	
 	private final long my;
 	
@@ -58,9 +60,9 @@ public class LongExpectation extends BaseExpectation<LongExpectation> {
 	public LongExpectation equal(long expected, String message) {
 		
 		return test(my == expected,
-					message,
-					"Expected " + my + " to",
-					"equal " + expected + '.'
+		            message,
+		            "Expected " + my + " to",
+		            "equal " + expected + '.'
 		);
 	}
 	
@@ -89,9 +91,9 @@ public class LongExpectation extends BaseExpectation<LongExpectation> {
 	public LongExpectation above(long lowerBound, String message) {
 		
 		return test(my > lowerBound,
-					message,
-					"Expected " + my + " to",
-					"be above " + lowerBound + '.'
+		            message,
+		            "Expected " + my + " to",
+		            "be above " + lowerBound + '.'
 		);
 	}
 	
@@ -120,9 +122,9 @@ public class LongExpectation extends BaseExpectation<LongExpectation> {
 	public LongExpectation least(long lowerBound, String message) {
 		
 		return test(my >= lowerBound,
-					message,
-					"Expected " + my + " to",
-					"be at least " + lowerBound + '.'
+		            message,
+		            "Expected " + my + " to",
+		            "be at least " + lowerBound + '.'
 		);
 	}
 	
@@ -151,9 +153,9 @@ public class LongExpectation extends BaseExpectation<LongExpectation> {
 	public LongExpectation below(long upperBound, String message) {
 		
 		return test(my < upperBound,
-					message,
-					"Expected " + my + " to",
-					"be below " + upperBound + '.'
+		            message,
+		            "Expected " + my + " to",
+		            "be below " + upperBound + '.'
 		);
 	}
 	
@@ -182,9 +184,9 @@ public class LongExpectation extends BaseExpectation<LongExpectation> {
 	public LongExpectation most(long upperBound, String message) {
 		
 		return test(my <= upperBound,
-					message,
-					"Expected " + my + " to",
-					"be at most " + upperBound + '.'
+		            message,
+		            "Expected " + my + " to",
+		            "be at most " + upperBound + '.'
 		);
 	}
 	
@@ -216,10 +218,10 @@ public class LongExpectation extends BaseExpectation<LongExpectation> {
 	 */
 	public LongExpectation within(long min, long max, String message) {
 		
-		return test(min <= my && my <= max,
-					message,
-					"Expected " + my + " to",
-					"be within " + min + " and " + max + '.'
+		return test((min <= my) && (my <= max),
+		            message,
+		            "Expected " + my + " to",
+		            "be within " + min + " and " + max + '.'
 		);
 	}
 	
@@ -250,9 +252,9 @@ public class LongExpectation extends BaseExpectation<LongExpectation> {
 	public LongExpectation match(LongPredicate predicate, String message) {
 		
 		return test(predicate.test(my),
-					message,
-					"Expected " + my + " to",
-					"match a custom predicate."
+		            message,
+		            "Expected " + my + " to",
+		            "match a custom predicate."
 		);
 	}
 	
@@ -283,9 +285,9 @@ public class LongExpectation extends BaseExpectation<LongExpectation> {
 	public LongExpectation satisfy(LongPredicate predicate, String message) {
 		
 		return test(predicate.test(my),
-					message,
-					"Expected " + my + " to",
-					"satisfy a custom predicate."
+		            message,
+		            "Expected " + my + " to",
+		            "satisfy a custom predicate."
 		);
 	}
 	
@@ -318,9 +320,9 @@ public class LongExpectation extends BaseExpectation<LongExpectation> {
 	public LongExpectation closeTo(long expected, long delta, String message) {
 		
 		return test(Math.abs(my - expected) <= delta,
-					message,
-					"Expected " + my + " to",
-					"be close to " + expected + " with a delta of " + delta + '.'
+		            message,
+		            "Expected " + my + " to",
+		            "be close to " + expected + " with a delta of " + delta + '.'
 		);
 	}
 	
@@ -351,14 +353,14 @@ public class LongExpectation extends BaseExpectation<LongExpectation> {
 	public LongExpectation oneOf(String message, long... arr) {
 		
 		boolean found = false;
-		long length = arr.length;
-		for(int i = 0; i < length && !found; ++i) {
+		int length = arr.length;
+		for(int i = 0; (i < length) && !found; ++i) {
 			found = arr[i] == my;
 		}
 		return test(found,
-					message,
-					"Expected " + my + " to",
-					"be one of " + Arrays.toString(arr) + '.'
+		            message,
+		            "Expected " + my + " to",
+		            "be one of " + Arrays.toString(arr) + '.'
 		);
 	}
 	
@@ -385,10 +387,10 @@ public class LongExpectation extends BaseExpectation<LongExpectation> {
 	 */
 	public LongExpectation validByte(String message) {
 		
-		return test(Byte.MIN_VALUE <= my && my <= Byte.MAX_VALUE,
-					message,
-					"Expected " + my + " to",
-					"be a valid byte value."
+		return test((Byte.MIN_VALUE <= my) && (my <= Byte.MAX_VALUE),
+		            message,
+		            "Expected " + my + " to",
+		            "be a valid byte value."
 		);
 	}
 	
@@ -415,10 +417,10 @@ public class LongExpectation extends BaseExpectation<LongExpectation> {
 	 */
 	public LongExpectation validShort(String message) {
 		
-		return test(Short.MIN_VALUE <= my && my <= Short.MAX_VALUE,
-					message,
-					"Expected " + my + " to",
-					"be a valid short value."
+		return test((Short.MIN_VALUE <= my) && (my <= Short.MAX_VALUE),
+		            message,
+		            "Expected " + my + " to",
+		            "be a valid short value."
 		);
 	}
 	
@@ -445,10 +447,19 @@ public class LongExpectation extends BaseExpectation<LongExpectation> {
 	 */
 	public LongExpectation validInt(String message) {
 		
-		return test(Integer.MIN_VALUE <= my && my <= Integer.MAX_VALUE,
-					message,
-					"Expected " + my + " to",
-					"be a valid integer value."
+		return test((Integer.MIN_VALUE <= my) && (my <= Integer.MAX_VALUE),
+		            message,
+		            "Expected " + my + " to",
+		            "be a valid integer value."
+		);
+	}
+	
+	
+	@Override
+	public String toString() {
+		
+		return String.format("LongExpectation(value=%d, customText=%s)",
+		                     my, customText
 		);
 	}
 }

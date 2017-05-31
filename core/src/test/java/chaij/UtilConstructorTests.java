@@ -13,7 +13,7 @@ import static org.hamcrest.CoreMatchers.isA;
 public class UtilConstructorTests {
 	
 	@Rule
-	public ExpectedException e = ExpectedException.none();
+	public final ExpectedException e = ExpectedException.none();
 	
 	
 	@Test

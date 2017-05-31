@@ -11,6 +11,8 @@ import java.lang.annotation.Target;
  *
  * <p>
  * Use in combination with {@link MultipleExpectations#none()}.
+ *
+ * @since 0.1.0
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

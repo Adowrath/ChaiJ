@@ -296,7 +296,9 @@
     </inspection_tool>
     <inspection_tool class="AnonymousClassVariableHidesContainingMethodVariable" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="AnonymousHasLambdaAlternative" enabled="true" level="ERROR" enabled_by_default="true" />
-    <inspection_tool class="AnonymousInnerClass" enabled="false" level="ERROR" enabled_by_default="false" />
+    <inspection_tool class="AnonymousInnerClass" enabled="true" level="ERROR" enabled_by_default="true">
+      <scope name="Tests" level="ERROR" enabled="false" />
+    </inspection_tool>
     <inspection_tool class="AnonymousInnerClassMayBeStatic" enabled="true" level="ERROR" enabled_by_default="true">
       <scope name="Tests" level="ERROR" enabled="false" />
     </inspection_tool>
@@ -374,6 +376,12 @@
       <option name="ignoreLibraryOverrides" value="true" />
     </inspection_tool>
     <inspection_tool class="BadExceptionThrown" enabled="true" level="ERROR" enabled_by_default="true">
+      <scope name="Tests" level="ERROR" enabled="false">
+        <option name="exceptionsString" value="" />
+        <option name="exceptions">
+          <value />
+        </option>
+      </scope>
       <option name="exceptionsString" value="" />
       <option name="exceptions">
         <value />
@@ -478,20 +486,22 @@
       <option name="excludeTestCode" value="true" />
       <option name="excludeInnerClasses" value="true" />
     </inspection_tool>
-    <inspection_tool class="ClassIndependentOfModule" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="ClassIndependentOfModule" enabled="true" level="ERROR" enabled_by_default="true">
+      <scope name="Tests" level="ERROR" enabled="false" />
+    </inspection_tool>
     <inspection_tool class="ClassInheritanceDepth" enabled="true" level="ERROR" enabled_by_default="true">
-      <option name="m_limit" value="2" />
+      <option name="m_limit" value="5" />
     </inspection_tool>
     <inspection_tool class="ClassInitializer" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="ClassInitializerMayBeStatic" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="ClassLoaderInstantiation" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="ClassMayBeInterface" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="ClassNameDiffersFromFileName" enabled="true" level="ERROR" enabled_by_default="true" />
-    <inspection_tool class="ClassNamePrefixedWithPackageName" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="ClassNamePrefixedWithPackageName" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="ClassNameSameAsAncestorName" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="ClassNamingConvention" enabled="true" level="ERROR" enabled_by_default="true">
       <option name="m_regex" value="[A-Z][A-Za-z\d]*" />
-      <option name="m_minLength" value="8" />
+      <option name="m_minLength" value="4" />
       <option name="m_maxLength" value="64" />
     </inspection_tool>
     <inspection_tool class="ClassNestingDepth" enabled="true" level="ERROR" enabled_by_default="true">
@@ -1119,7 +1129,7 @@
     </inspection_tool>
     <inspection_tool class="ImplicitDefaultCharsetUsage" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="ImplicitNumericConversion" enabled="true" level="ERROR" enabled_by_default="true">
-      <option name="ignoreWideningConversions" value="false" />
+      <option name="ignoreWideningConversions" value="true" />
       <option name="ignoreCharConversions" value="false" />
       <option name="ignoreConstantConversions" value="false" />
     </inspection_tool>
@@ -1157,6 +1167,11 @@
       <option name="m_ignorePrimitives" value="false" />
     </inspection_tool>
     <inspection_tool class="InstanceVariableNamingConvention" enabled="true" level="ERROR" enabled_by_default="true">
+      <scope name="Tests" level="ERROR" enabled="true">
+        <option name="m_regex" value="[a-z_][_A-Za-z\d]*" />
+        <option name="m_minLength" value="1" />
+        <option name="m_maxLength" value="32" />
+      </scope>
       <option name="m_regex" value="[a-z_][_A-Za-z\d]*" />
       <option name="m_minLength" value="2" />
       <option name="m_maxLength" value="32" />
@@ -1240,7 +1255,7 @@
     <inspection_tool class="Java9RedundantRequiresStatement" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="JavaAccessorMethodCalledAsEmptyParen" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="JavaAccessorMethodOverridenAsEmptyParen" enabled="true" level="ERROR" enabled_by_default="true" />
-    <inspection_tool class="JavaDoc" enabled="true" level="ERROR" enabled_by_default="true">
+    <inspection_tool class="JavaDoc" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Tests" level="ERROR" enabled="false">
         <option name="TOP_LEVEL_CLASS_OPTIONS">
           <value>
@@ -1344,6 +1359,9 @@
     </inspection_tool>
     <inspection_tool class="LastIndexToLast" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="LawOfDemeter" enabled="true" level="ERROR" enabled_by_default="true">
+      <scope name="Tests" level="ERROR" enabled="false">
+        <option name="ignoreLibraryCalls" value="true" />
+      </scope>
       <option name="ignoreLibraryCalls" value="true" />
     </inspection_tool>
     <inspection_tool class="LeakingThis" enabled="true" level="ERROR" enabled_by_default="true" />
@@ -1494,7 +1512,7 @@
     <inspection_tool class="MisspelledSetUp" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="MisspelledTearDown" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="MisspelledToString" enabled="true" level="ERROR" enabled_by_default="true" />
-    <inspection_tool class="ModuleWithTooFewClasses" enabled="true" level="ERROR" enabled_by_default="true">
+    <inspection_tool class="ModuleWithTooFewClasses" enabled="false" level="ERROR" enabled_by_default="false">
       <option name="limit" value="10" />
     </inspection_tool>
     <inspection_tool class="ModuleWithTooManyClasses" enabled="true" level="ERROR" enabled_by_default="true">
@@ -1753,7 +1771,7 @@
       </option>
     </inspection_tool>
     <inspection_tool class="PublicFieldAccessedInSynchronizedContext" enabled="true" level="ERROR" enabled_by_default="true" />
-    <inspection_tool class="PublicInnerClass" enabled="true" level="ERROR" enabled_by_default="true">
+    <inspection_tool class="PublicInnerClass" enabled="false" level="ERROR" enabled_by_default="false">
       <option name="ignoreEnums" value="false" />
       <option name="ignoreInterfaces" value="false" />
     </inspection_tool>
@@ -1769,7 +1787,7 @@
     <inspection_tool class="PublicStaticArrayField" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="PublicStaticCollectionField" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="QuestionableName" enabled="true" level="ERROR" enabled_by_default="true">
-      <option name="nameString" value="aa,abc,bad,bar,bar2,baz,baz1,baz2,baz3,bb,blah,bogus,bool,cc,dd,defau1t,dummy,dummy2,ee,fa1se,ff,foo,foo1,foo2,foo3,foobar,four,fred,fred1,fred2,gg,hh,hello,hello1,hello2,hello3,ii,nu11,one,silly,silly2,string,two,that,then,three,whi1e,var" />
+      <option name="nameString" value="aa,abc,bad,bar,bar2,baz,baz1,baz2,baz3,bb,blah,bogus,bool,cc,dd,defau1t,dummy,dummy2,ee,fa1se,ff,foo,foo1,foo2,foo3,foobar,four,fred,fred1,fred2,gg,hh,hello,hello1,hello2,hello3,ii,nu11,one,silly,silly2,string,two,then,three,whi1e,var" />
     </inspection_tool>
     <inspection_tool class="QuickFixGetFamilyNameViolation" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="RandomDoubleForRandomInteger" enabled="true" level="ERROR" enabled_by_default="true" />
@@ -1777,6 +1795,7 @@
     <inspection_tool class="RawTypeCanBeGeneric" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="RawUseOfParameterizedType" enabled="true" level="ERROR" enabled_by_default="true">
       <option name="ignoreObjectConstruction" value="false" />
+      <option name="ignoreUncompilable" value="true" />
     </inspection_tool>
     <inspection_tool class="ReadObjectAndWriteObjectPrivate" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="ReadObjectInitialization" enabled="true" level="ERROR" enabled_by_default="true" />
@@ -2182,13 +2201,13 @@
     <inspection_tool class="TypeParameterNamingConvention" enabled="true" level="ERROR" enabled_by_default="true">
       <option name="m_regex" value="[A-Z][A-Za-z\d]*" />
       <option name="m_minLength" value="1" />
-      <option name="m_maxLength" value="1" />
+      <option name="m_maxLength" value="16" />
     </inspection_tool>
     <inspection_tool class="TypeParameterShadow" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="UNCHECKED_WARNING" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="UNUSED_IMPORT" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="UnaryPlus" enabled="true" level="ERROR" enabled_by_default="true" />
-    <inspection_tool class="UncheckedExceptionClass" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="UncheckedExceptionClass" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="UnclearBinaryExpression" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="UnconditionalWait" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="UnconstructableTestCase" enabled="true" level="ERROR" enabled_by_default="true" />

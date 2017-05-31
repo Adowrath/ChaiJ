@@ -26,8 +26,9 @@ import org.junit.runners.model.Statement;
  *     expect(false).to.be.ok(); // Awesome, right?
  * } // Now, at the end of the day, of course this test still fails. But it throws an Exception containing all failures!
  * </pre>
+ *
+ * @since 0.1.0
  */
-@SuppressWarnings("StaticVariableOfConcreteClass")
 public final class MultipleExpectations implements TestRule {
 	
 	private final boolean enabledByDefault;
@@ -46,30 +47,31 @@ public final class MultipleExpectations implements TestRule {
 	
 	
 	@Override
-	@SuppressWarnings("ReturnOfInnerClass")
-	public Statement apply(Statement statement, Description description) {
+	@SuppressWarnings({"ReturnOfInnerClass", "AnonymousInnerClassMayBeStatic", "AnonymousInnerClass"})
+	public Statement apply(Statement base, Description description) {
 		
+		boolean enabled = enabledByDefault;
 		return new Statement() {
 			@Override
 			public void evaluate()
 					throws Throwable {
 				
-				if(enabledByDefault ?
-				   description.getAnnotation(SingleExpectation.class) == null :
-				   description.getAnnotation(MultipleExpectation.class) != null) {
+				if(enabled ?
+				   (description.getAnnotation(SingleExpectation.class) == null) :
+				   (description.getAnnotation(MultipleExpectation.class) != null)) {
 					
-					ExceptionReporter.runMultipleAndReport(statement::evaluate);
+					ExceptionReporter.runMultipleAndReport(base::evaluate);
 				} else {
-					statement.evaluate();
+					base.evaluate();
 				}
 			}
 		};
 	}
 	
 	
-	private static final MultipleExpectations ALL_MULTIPLE = new MultipleExpectations(true);
+	private static final TestRule ALL_MULTIPLE = new MultipleExpectations(true);
 	
-	private static final MultipleExpectations NONE_MULTIPLE = new MultipleExpectations(false);
+	private static final TestRule NONE_MULTIPLE = new MultipleExpectations(false);
 	
 	
 	/**
@@ -82,7 +84,7 @@ public final class MultipleExpectations implements TestRule {
 	 *
 	 * @return a rule that can handle multiple test failures within one unit test.
 	 */
-	public static MultipleExpectations all() {
+	public static TestRule all() {
 		
 		return ALL_MULTIPLE;
 	}
@@ -98,8 +100,17 @@ public final class MultipleExpectations implements TestRule {
 	 *
 	 * @return a rule that accepts only a single failing expectation test per test case.
 	 */
-	public static MultipleExpectations none() {
+	public static TestRule none() {
 		
 		return NONE_MULTIPLE;
+	}
+	
+	
+	@Override
+	public String toString() {
+		
+		return String.format("MultipleExpectations(enabledByDefault=%b)",
+		                     enabledByDefault
+		);
 	}
 }

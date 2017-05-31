@@ -222,7 +222,7 @@ public class IntExpectationTests {
 	public static class MessageTests {
 		
 		@Rule
-		public ExpectedException e = ExpectedException.none();
+		public final ExpectedException e = ExpectedException.none();
 		
 		
 		@Test

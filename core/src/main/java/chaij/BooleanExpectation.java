@@ -8,6 +8,8 @@ package chaij;
  * Because of the limited amount of values a boolean can take,
  * this class only offers an equally limited subset of operations
  * that suffice for working with booleans.
+ *
+ * @since 0.0.1
  */
 public final class BooleanExpectation extends BaseExpectation<BooleanExpectation> {
 	
@@ -57,7 +59,11 @@ public final class BooleanExpectation extends BaseExpectation<BooleanExpectation
 	 */
 	public BooleanExpectation ok(String message) {
 		
-		return test(my, message, "Expected a", "ok-ish boolean.");
+		return test(my,
+		            message,
+		            "Expected a",
+		            "ok-ish boolean."
+		);
 	}
 	
 	
@@ -68,7 +74,6 @@ public final class BooleanExpectation extends BaseExpectation<BooleanExpectation
 	 *
 	 * @see #ok()
 	 */
-	@SuppressWarnings("InstanceMethodNamingConvention")
 	public BooleanExpectation _true() {
 		
 		return _true(null);
@@ -85,10 +90,13 @@ public final class BooleanExpectation extends BaseExpectation<BooleanExpectation
 	 *
 	 * @see #ok()
 	 */
-	@SuppressWarnings("InstanceMethodNamingConvention")
 	public BooleanExpectation _true(String message) {
 		
-		return test(my, message, "Expected a", "true boolean.");
+		return test(my,
+		            message,
+		            "Expected a",
+		            "true boolean."
+		);
 	}
 	
 	
@@ -97,7 +105,6 @@ public final class BooleanExpectation extends BaseExpectation<BooleanExpectation
 	 *
 	 * @return the expectation itself for chaining
 	 */
-	@SuppressWarnings("InstanceMethodNamingConvention")
 	public BooleanExpectation _false() {
 		
 		return _false(null);
@@ -112,10 +119,13 @@ public final class BooleanExpectation extends BaseExpectation<BooleanExpectation
 	 *
 	 * @return the expectation itself for chaining
 	 */
-	@SuppressWarnings("InstanceMethodNamingConvention")
 	public BooleanExpectation _false(String message) {
 		
-		return test(!my, message, "Expected a", "false boolean.");
+		return test(!my,
+		            message,
+		            "Expected a",
+		            "false boolean."
+		);
 	}
 	
 	
@@ -153,9 +163,18 @@ public final class BooleanExpectation extends BaseExpectation<BooleanExpectation
 	public BooleanExpectation equal(boolean expected, String message) {
 		
 		return test(my == expected,
-					message,
-					"Expected " + my + " to",
-					"equal " + expected + '.'
+		            message,
+		            "Expected " + my + " to",
+		            "equal " + expected + '.'
+		);
+	}
+	
+	
+	@Override
+	public String toString() {
+		
+		return String.format("BooleanExpectation(value=%b, customText=%s)",
+		                     my, customText
 		);
 	}
 }

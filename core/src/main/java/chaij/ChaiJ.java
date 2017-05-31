@@ -3,8 +3,9 @@ package chaij;
 
 /**
  * The collection of all expect methods offered by ChaiJ itself.
+ *
+ * @since 0.0.1
  */
-@SuppressWarnings({"MethodReturnOfConcreteClass", "OverloadedMethodsWithSameNumberOfParameters"})
 public final class ChaiJ {
 	
 	/**

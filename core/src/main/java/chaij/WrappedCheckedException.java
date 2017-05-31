@@ -3,9 +3,10 @@ package chaij;
 
 /**
  * Generic wrapper for any checked exception so that no other method has to declare them.
+ *
+ * @since 0.1.0
  */
-public class WrappedCheckedException extends ChaiJException {
-	
+public final class WrappedCheckedException extends ChaiJException {
 	
 	private static final long serialVersionUID = -1135127015268320561L;
 	

@@ -135,7 +135,7 @@ public class LongExpectationTests {
 		
 		
 		@Test(expected = UnmetExpectationException.class)
-		public void testWrongtisfy() {
+		public void testWrongSatisfy() {
 			
 			expect(42L).satisfy(l -> l == 43L);
 		}
@@ -156,7 +156,7 @@ public class LongExpectationTests {
 		
 		
 		@Test(expected = UnmetExpectationException.class)
-		public void testWrongoseTo() {
+		public void testWrongCloseTo() {
 			
 			expect(42L).closeTo(41L, 0L);
 		}
@@ -243,7 +243,7 @@ public class LongExpectationTests {
 	public static class MessageTests {
 		
 		@Rule
-		public ExpectedException e = ExpectedException.none();
+		public final ExpectedException e = ExpectedException.none();
 		
 		
 		@Test

@@ -9,8 +9,10 @@ import java.util.function.IntPredicate;
  * numeric types - e.g. {@link #above(int)}, {@link #oneOf(int...)}
  * etc., but also validity checkers such as the {@link #validByte()} and
  * {@link #validShort()} methods.
+ *
+ * @since 0.0.1
  */
-public class IntExpectation extends BaseExpectation<IntExpectation> {
+public final class IntExpectation extends BaseExpectation<IntExpectation> {
 	
 	private final int my;
 	
@@ -56,13 +58,12 @@ public class IntExpectation extends BaseExpectation<IntExpectation> {
 	 *
 	 * @return the expectation itself for chaining
 	 */
-	@SuppressWarnings("MisspelledEquals")
 	public IntExpectation equal(int expected, String message) {
 		
 		return test(my == expected,
-					message,
-					"Expected " + my + " to",
-					"equal " + expected + '.'
+		            message,
+		            "Expected " + my + " to",
+		            "equal " + expected + '.'
 		);
 	}
 	
@@ -92,9 +93,9 @@ public class IntExpectation extends BaseExpectation<IntExpectation> {
 	public IntExpectation above(int lowerBound, String message) {
 		
 		return test(my > lowerBound,
-					message,
-					"Expected " + my + " to",
-					"be above " + lowerBound + '.'
+		            message,
+		            "Expected " + my + " to",
+		            "be above " + lowerBound + '.'
 		);
 	}
 	
@@ -124,9 +125,9 @@ public class IntExpectation extends BaseExpectation<IntExpectation> {
 	public IntExpectation least(int lowerBound, String message) {
 		
 		return test(my >= lowerBound,
-					message,
-					"Expected " + my + " to",
-					"be at least " + lowerBound + '.'
+		            message,
+		            "Expected " + my + " to",
+		            "be at least " + lowerBound + '.'
 		);
 	}
 	
@@ -156,9 +157,9 @@ public class IntExpectation extends BaseExpectation<IntExpectation> {
 	public IntExpectation below(int upperBound, String message) {
 		
 		return test(my < upperBound,
-					message,
-					"Expected " + my + " to",
-					"be below " + upperBound + '.'
+		            message,
+		            "Expected " + my + " to",
+		            "be below " + upperBound + '.'
 		);
 	}
 	
@@ -188,9 +189,9 @@ public class IntExpectation extends BaseExpectation<IntExpectation> {
 	public IntExpectation most(int upperBound, String message) {
 		
 		return test(my <= upperBound,
-					message,
-					"Expected " + my + " to",
-					"be at most " + upperBound + '.'
+		            message,
+		            "Expected " + my + " to",
+		            "be at most " + upperBound + '.'
 		);
 	}
 	
@@ -222,10 +223,10 @@ public class IntExpectation extends BaseExpectation<IntExpectation> {
 	 */
 	public IntExpectation within(int min, int max, String message) {
 		
-		return test(min <= my && my <= max,
-					message,
-					"Expected " + my + " to",
-					"be within " + min + " and " + max + '.'
+		return test((min <= my) && (my <= max),
+		            message,
+		            "Expected " + my + " to",
+		            "be within " + min + " and " + max + '.'
 		);
 	}
 	
@@ -256,9 +257,9 @@ public class IntExpectation extends BaseExpectation<IntExpectation> {
 	public IntExpectation match(IntPredicate predicate, String message) {
 		
 		return test(predicate.test(my),
-					message,
-					"Expected " + my + " to",
-					"match a custom predicate."
+		            message,
+		            "Expected " + my + " to",
+		            "match a custom predicate."
 		);
 	}
 	
@@ -289,9 +290,9 @@ public class IntExpectation extends BaseExpectation<IntExpectation> {
 	public IntExpectation satisfy(IntPredicate predicate, String message) {
 		
 		return test(predicate.test(my),
-					message,
-					"Expected " + my + " to",
-					"satisfy a custom predicate."
+		            message,
+		            "Expected " + my + " to",
+		            "satisfy a custom predicate."
 		);
 	}
 	
@@ -324,9 +325,9 @@ public class IntExpectation extends BaseExpectation<IntExpectation> {
 	public IntExpectation closeTo(int expected, int delta, String message) {
 		
 		return test(Math.abs(my - expected) <= delta,
-					message,
-					"Expected " + my + " to",
-					"be close to " + expected + " with a delta of " + delta + '.'
+		            message,
+		            "Expected " + my + " to",
+		            "be close to " + expected + " with a delta of " + delta + '.'
 		);
 	}
 	
@@ -362,13 +363,13 @@ public class IntExpectation extends BaseExpectation<IntExpectation> {
 		
 		boolean found = false;
 		int length = arr.length;
-		for(int i = 0; i < length && !found; ++i) {
+		for(int i = 0; (i < length) && !found; ++i) {
 			found = arr[i] == my;
 		}
 		return test(found,
-					message,
-					"Expected " + my + " to",
-					"be one of " + Arrays.toString(arr) + '.'
+		            message,
+		            "Expected " + my + " to",
+		            "be one of " + Arrays.toString(arr) + '.'
 		);
 	}
 	
@@ -395,10 +396,10 @@ public class IntExpectation extends BaseExpectation<IntExpectation> {
 	 */
 	public IntExpectation validByte(String message) {
 		
-		return test(Byte.MIN_VALUE <= my && my <= Byte.MAX_VALUE,
-					message,
-					"Expected " + my + " to",
-					"be a valid byte value."
+		return test((Byte.MIN_VALUE <= my) && (my <= Byte.MAX_VALUE),
+		            message,
+		            "Expected " + my + " to",
+		            "be a valid byte value."
 		);
 	}
 	
@@ -425,10 +426,19 @@ public class IntExpectation extends BaseExpectation<IntExpectation> {
 	 */
 	public IntExpectation validShort(String message) {
 		
-		return test(Short.MIN_VALUE <= my && my <= Short.MAX_VALUE,
-					message,
-					"Expected " + my + " to",
-					"be a valid short value."
+		return test((Short.MIN_VALUE <= my) && (my <= Short.MAX_VALUE),
+		            message,
+		            "Expected " + my + " to",
+		            "be a valid short value."
+		);
+	}
+	
+	
+	@Override
+	public String toString() {
+		
+		return String.format("IntExpectation(value=%d, customText=%s)",
+		                     my, customText
 		);
 	}
 }

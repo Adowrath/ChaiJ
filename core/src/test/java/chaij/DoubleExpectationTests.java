@@ -189,21 +189,21 @@ public class DoubleExpectationTests {
 		@Test
 		public void testCloseToDistanceZero() {
 			
-			expect(42.0D).closeTo(42.0D, 0);
+			expect(42.0D).closeTo(42.0D, 0.0D);
 		}
 		
 		
 		@Test
 		public void testCloseToDistanceOne() {
 			
-			expect(42.0D).closeTo(41.0D, 1).closeTo(43.0D, 1);
+			expect(42.0D).closeTo(41.0D, 1.0D).closeTo(43.0D, 1.0D);
 		}
 		
 		
 		@Test(expected = UnmetExpectationException.class)
 		public void testWrongCloseTo() {
 			
-			expect(42.0D).closeTo(41.0D, 0);
+			expect(42.0D).closeTo(41.0D, 0.0D);
 		}
 		
 		
@@ -225,7 +225,7 @@ public class DoubleExpectationTests {
 	public static class MessageTests {
 		
 		@Rule
-		public ExpectedException e = ExpectedException.none();
+		public final ExpectedException e = ExpectedException.none();
 		
 		
 		@Test
