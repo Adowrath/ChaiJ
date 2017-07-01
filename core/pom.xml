@@ -6,11 +6,15 @@
 
     <parent>
         <artifactId>chaiJ</artifactId>
-        <groupId>adowrath</groupId>
-        <version>0.1.1</version>
+        <groupId>com.github.adowrath</groupId>
+        <version>0.2.0</version>
+        <relativePath>..</relativePath>
     </parent>
 
+    <name>ChaiJ - Core</name>
+
     <artifactId>chaiJ-core</artifactId>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
