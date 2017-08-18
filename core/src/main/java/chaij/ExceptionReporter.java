@@ -129,6 +129,7 @@ public final class ExceptionReporter {
 		@Override
 		public String getMessage() {
 			
+			StringBuilder sb = new StringBuilder(String.format("There were %d errors:", errors.size()));
 			return errors.stream().map(error -> {
 				Throwable cause = error.getCause();
 				return (cause != null) ?
@@ -139,7 +140,7 @@ public final class ExceptionReporter {
 				       String.format("%n - %s(%s)",
 				                     error.getClass().getName(), error.getMessage()
 				       );
-			}).collect(StringBuilder::new, StringBuilder::append, StringBuilder::append).toString();
+			}).collect(() -> sb, StringBuilder::append, StringBuilder::append).toString();
 		}
 	}
 }
