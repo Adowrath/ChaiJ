@@ -129,21 +129,17 @@ public final class ExceptionReporter {
 		@Override
 		public String getMessage() {
 			
-			StringBuilder sb = new StringBuilder(String.format("There were %d errors:", errors.size()));
-			for(Throwable error : errors) {
-				if(error.getCause() != null) {
-					Throwable cause = error.getCause();
-					sb.append(String.format("%n - %s(%s) with cause%n    %s(%s)",
-					                        error.getClass().getName(), error.getMessage(),
-					                        cause.getClass().getName(), cause.getMessage()
-					));
-				} else {
-					sb.append(String.format("%n - %s(%s)",
-					                        error.getClass().getName(), error.getMessage()
-					));
-				}
-			}
-			return sb.toString();
+			return errors.stream().map(error -> {
+				Throwable cause = error.getCause();
+				return (cause != null) ?
+				       String.format("%n - %s(%s) with cause%n    %s(%s)",
+				                     error.getClass().getName(), error.getMessage(),
+				                     cause.getClass().getName(), cause.getMessage()
+				       ) :
+				       String.format("%n - %s(%s)",
+				                     error.getClass().getName(), error.getMessage()
+				       );
+			}).collect(StringBuilder::new, StringBuilder::append, StringBuilder::append).toString();
 		}
 	}
 }
