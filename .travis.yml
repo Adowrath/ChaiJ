@@ -7,6 +7,9 @@ cache:
     - $HOME/.ivy2/cache
     - $HOME/.sbt/boot
 
+scala:
+  - 2.12.6
+
 jdk:
   - oraclejdk8
 
@@ -17,3 +20,4 @@ install:
 
 script:
   - sbt ++$TRAVIS_SCALA_VERSION clean coverage test coverageReport
+  - sbt coverageAggregate && codecov
