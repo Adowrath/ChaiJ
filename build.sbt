@@ -44,6 +44,7 @@ lazy val mockitoLib = "org.mockito" % "mockito-core" % mockitoVer
 lazy val   junitLib = "junit" % "junit" % junitVer % "test"
 
 lazy val root = (project in file("."))
+    .settings(commonSettings: _*)
     .aggregate(core, junit)
 
 lazy val core = (project in file("core"))
@@ -57,6 +58,8 @@ lazy val junit = (project in file("junit"))
   .settings(nonScalaSettings: _*)
   .settings(libraryDependencies += "junit" % "junit" % junitVer % "compile")
   .dependsOn(core)
+
+useGpg := true
 
 skip in publish := true
 parallelExecution in ThisBuild := false
