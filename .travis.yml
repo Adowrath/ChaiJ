@@ -1,6 +1,19 @@
-language: java
+# inspired by https://github.com/circe/circe/blob/46a248e27a838b0a96ee74e4e1c6dab49c04c3dc/.travis.yml
+
+language: scala
+
+cache:
+  directories:
+    - $HOME/.ivy2/cache
+    - $HOME/.sbt/boot
+
 jdk:
   - oraclejdk8
 
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
+
+
+install:
+  - pip install --user codecov
+
+script:
+  - sbt ++$TRAVIS_SCALA_VERSION clean coverage test coverageReport
