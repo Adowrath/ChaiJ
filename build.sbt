@@ -60,7 +60,5 @@ lazy val junit = (project in file("junit"))
   .settings(libraryDependencies += "junit" % "junit" % junitVer % "compile")
   .dependsOn(core)
 
-useGpg := true
-
 skip in publish := true
 parallelExecution in ThisBuild := false
