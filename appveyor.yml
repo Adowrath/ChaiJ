@@ -20,6 +20,7 @@ cache:
   - '%USERPROFILE%\.ivy2\cache'
   - '%USERPROFILE%\.sbt\boot'
 
+build_script: 
 
 test_script:
   - cmd: sbt ++%SCALA_VERSION% clean test
