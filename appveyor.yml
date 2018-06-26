@@ -1,0 +1,25 @@
+# Inspired by https://github.com/scala-js/scala-js/commit/fe7744c1ed6153588c98b1e4142931d6c4daafa9#diff-180360612c6b8c4ed830919bbb4dd459
+
+version: '{build}'
+
+image: Visual Studio 2015
+
+environment:
+  global:
+    JAVA_HOME: C:\Program Files\Java\jdk1.8.0
+    SCALA_VERSION: 2.12.6
+    SBT_VERSION: 1.1.6
+
+install:
+  - cmd: choco install sbt --version %SBT_VERSION% -ia "INSTALLDIR=""C:\sbt"""
+  - cmd: SET PATH=C:\sbt\bin;%JAVA_HOME%\bin;%PATH%
+  - cmd: SET SBT_OPTS=-Xmx4g
+
+cache:
+  - C:\sbt
+  - '%USERPROFILE%\.ivy2\cache'
+  - '%USERPROFILE%\.sbt\boot'
+
+
+test_script:
+  - cmd: sbt ++%SCALA_VERSION% clean test
