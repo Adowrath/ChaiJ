@@ -8,3 +8,4 @@ Specifically, it ports the `expect`-style.
 [![license](https://img.shields.io/github/license/Adowrath/ChaiJ.svg?style=flat)](./LICENSE)
 [![Travis](https://img.shields.io/travis/Adowrath/ChaiJ.svg?style=flat)](https://travis-ci.org/Adowrath/ChaiJ)
 [![Coverage](https://img.shields.io/codecov/c/github/Adowrath/ChaiJ.svg?style=flat)](https://codecov.io/gh/Adowrath/ChaiJ)
+[![AppVeyor](https://ci.appveyor.com/api/projects/status/gbngjx6r3eofonee?svg=true)](https://ci.appveyor.com/project/Adowrath/chaij)
