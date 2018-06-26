@@ -48,7 +48,7 @@ lazy val nonScalaSettings = Seq(
   Test / autoScalaLibrary := true, // ScalaTest
 )
 
-lazy val mockitoVer = "2.8.47"
+lazy val mockitoVer = "2.19.0"
 lazy val junitVer   = "4.12"
 
 lazy val mockitoLib = "org.mockito" % "mockito-core" % mockitoVer
@@ -69,10 +69,6 @@ lazy val junit = (project in file("junit"))
   .settings(nonScalaSettings: _*)
   .settings(libraryDependencies += "junit" % "junit" % junitVer % "compile")
   .dependsOn(core)
-
-lazy val ttt = (project in file("ttt"))
-  .settings(name := "chaiJ-ttt")
-  .settings(commonSettings: _*)
 
 skip in publish := true
 parallelExecution in ThisBuild := false
