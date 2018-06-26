@@ -27,6 +27,7 @@ lazy val commonSettings = Seq(
   libraryDependencies ++= Seq(
     mockitoLib,
     junitLib,
+    "org.scalatest" %% "scalatest" % "3.0.5" % "test",
     "org.junit.platform" % "junit-platform-runner" % "1.2.0" % "test",
     "org.junit.jupiter" % "junit-jupiter-engine" % "5.1.0" % "test",
     "org.junit.vintage" % "junit-vintage-engine" % "5.1.0" % "test",
@@ -36,6 +37,7 @@ lazy val commonSettings = Seq(
 lazy val nonScalaSettings = Seq(
   crossPaths := false,
   autoScalaLibrary := false,
+  Test / autoScalaLibrary := true, // ScalaTest
 )
 
 lazy val mockitoVer = "2.8.47"
