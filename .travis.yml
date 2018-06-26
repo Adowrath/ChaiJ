@@ -9,9 +9,18 @@ cache:
 
 scala:
   - 2.12.6
+  - 2.13.0-M4
 
 jdk:
   - oraclejdk8
+  - oraclejdk9
+  - oraclejdk10
+
+matrix:
+  allow_failures:
+    - scala: 2.13.0-M4
+    - jdk: oraclejdk9
+    - jdk: oraclejdk10
 
 
 script:
