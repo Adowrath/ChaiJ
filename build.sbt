@@ -32,6 +32,14 @@ lazy val commonSettings = Seq(
     "org.junit.jupiter" % "junit-jupiter-engine" % "5.1.0" % "test",
     "org.junit.vintage" % "junit-vintage-engine" % "5.1.0" % "test",
   ),
+
+  jacocoReportSettings := JacocoReportSettings(
+    "Jacoco Coverage Report",
+    None,
+    JacocoThresholds(),
+    Seq(JacocoReportFormats.ScalaHTML, JacocoReportFormats.XML),
+    "utf-8"
+  ),
 )
 
 lazy val nonScalaSettings = Seq(
@@ -61,6 +69,10 @@ lazy val junit = (project in file("junit"))
   .settings(nonScalaSettings: _*)
   .settings(libraryDependencies += "junit" % "junit" % junitVer % "compile")
   .dependsOn(core)
+
+lazy val ttt = (project in file("ttt"))
+  .settings(name := "chaiJ-ttt")
+  .settings(commonSettings: _*)
 
 skip in publish := true
 parallelExecution in ThisBuild := false
