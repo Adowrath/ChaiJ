@@ -52,10 +52,11 @@ class MultipleExpectationsTestS extends FlatSpec with Matchers {
       }
     }
 
-    caught.getMessage should === (
-      """There were 2 errors:
-        | - chaij.UnmetExpectationException(Expected a ok-ish boolean.)
-        | - chaij.UnmetExpectationException(Expected 2 to be above 3.)""".stripMargin
+    caught.getMessage.lines.toList should === (
+      "There were 2 errors:" ::
+      " - chaij.UnmetExpectationException(Expected a ok-ish boolean.)" ::
+      " - chaij.UnmetExpectationException(Expected 2 to be above 3.)" ::
+			Nil
     )
   }
 
@@ -78,10 +79,11 @@ class MultipleExpectationsTestS extends FlatSpec with Matchers {
       }
     }
 
-    caught.getMessage should === (
-      """There were 2 errors:
-        | - chaij.UnmetExpectationException(Expected a ok-ish boolean.)
-        | - chaij.UnmetExpectationException(Expected 2 to be above 3.)""".stripMargin
+    caught.getMessage.lines.toList should === (
+      "There were 2 errors:" ::
+      " - chaij.UnmetExpectationException(Expected a ok-ish boolean.)" ::
+      " - chaij.UnmetExpectationException(Expected 2 to be above 3.)" ::
+			Nil
     )
   }
 
@@ -120,10 +122,11 @@ class MultipleExpectationsTestS extends FlatSpec with Matchers {
       }
     }
 
-    caught.getMessage should === (
-      """There were 2 errors:
-        | - chaij.UnmetExpectationException(Expected a ok-ish boolean.)
-        | - chaij.UnmetExpectationException(Expected 2 to be above 3.)""".stripMargin
+    caught.getMessage.lines.toList should === (
+      "There were 2 errors:" ::
+      " - chaij.UnmetExpectationException(Expected a ok-ish boolean.)" ::
+      " - chaij.UnmetExpectationException(Expected 2 to be above 3.)" ::
+			Nil
     )
   }
 
