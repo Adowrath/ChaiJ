@@ -14,7 +14,7 @@ import chaij.ChaiJ.expect
 import chaij.ExceptionReporter.MultipleException
 import chaij.UnmetExpectationException
 
-class MultipleExpectationsTestS extends FlatSpec with Matchers {
+class MultipleExpectationsTests extends FlatSpec with Matchers {
 
   val allRule:  TestRule = MultipleExpectations.all()
   val noneRule: TestRule = MultipleExpectations.none()
@@ -35,17 +35,15 @@ class MultipleExpectationsTestS extends FlatSpec with Matchers {
   }
 
   it should "report a single falsehood" in {
-    val caught = intercept[UnmetExpectationException] {
+    the [UnmetExpectationException] thrownBy {
       run(allRule) {
         expect(false).to.be.ok()
       }
-    }
-
-    caught.getMessage should === ("Expected a ok-ish boolean.")
+    } should have message "Expected a ok-ish boolean."
   }
 
   it should "report multiple falsehoods" in {
-    val caught = intercept[MultipleException] {
+    val caught = the [MultipleException] thrownBy {
       run(allRule) {
         expect(false).to.be.ok()
         expect(2).to.be.above(3)
@@ -61,18 +59,16 @@ class MultipleExpectationsTestS extends FlatSpec with Matchers {
   }
 
   it should "correctly recognize the 'single' annotation" in {
-    val caught = intercept[UnmetExpectationException] {
+    the [UnmetExpectationException] thrownBy {
       run(allRule, testDesc(getClass, "exceptionForSingle", single)) {
         expect(false).to.be.ok()
         expect(2).to.be.above(3)
       }
-    }
-
-    caught.getMessage should === ("Expected a ok-ish boolean.")
+    } should have message "Expected a ok-ish boolean."
   }
 
   it should "correctly ignore the 'multiple' annotation" in {
-    val caught = intercept[MultipleException] {
+    val caught = the [MultipleException] thrownBy {
       run(allRule, testDesc(getClass, "noExceptionForMultiple", multiple)) {
         expect(false).to.be.ok()
         expect(2).to.be.above(3)
@@ -94,28 +90,24 @@ class MultipleExpectationsTestS extends FlatSpec with Matchers {
   }
 
   it should "report a single falsehood" in {
-    val caught = intercept[UnmetExpectationException] {
+    the [UnmetExpectationException] thrownBy {
       run(noneRule) {
         expect(false).to.be.ok()
       }
-    }
-
-    caught.getMessage should === ("Expected a ok-ish boolean.")
+    } should have message "Expected a ok-ish boolean."
   }
 
   it should "not report multiple falsehoods" in {
-    val caught = intercept[UnmetExpectationException] {
+    the [UnmetExpectationException] thrownBy {
       run(noneRule) {
         expect(false).to.be.ok()
         expect(2).to.be.above(3)
       }
-    }
-
-    caught.getMessage should === ("Expected a ok-ish boolean.")
+    } should have message "Expected a ok-ish boolean."
   }
 
   it should "correctly recognize the 'multiple' annotation" in {
-    val caught = intercept[MultipleException] {
+    val caught = the [MultipleException] thrownBy {
       run(noneRule, testDesc(getClass, "exceptionForMultiple", multiple)) {
         expect(false).to.be.ok()
         expect(2).to.be.above(3)
@@ -131,13 +123,11 @@ class MultipleExpectationsTestS extends FlatSpec with Matchers {
   }
 
   it should "correctly ignore the 'single' annotation" in {
-    val caught = intercept[UnmetExpectationException] {
+    the [UnmetExpectationException] thrownBy {
       run(noneRule, testDesc(getClass, "noExceptionForSingle", single)) {
         expect(false).to.be.ok()
         expect(2).to.be.above(3)
       }
-    }
-
-    caught.getMessage should === ("Expected a ok-ish boolean.")
+    } should have message "Expected a ok-ish boolean."
   }
 }
