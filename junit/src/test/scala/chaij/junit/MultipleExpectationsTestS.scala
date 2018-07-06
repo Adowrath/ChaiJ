@@ -54,7 +54,7 @@ class MultipleExpectationsTests extends FlatSpec with Matchers {
       "There were 2 errors:" ::
       " - chaij.UnmetExpectationException(Expected a ok-ish boolean.)" ::
       " - chaij.UnmetExpectationException(Expected 2 to be above 3.)" ::
-			Nil
+      Nil
     )
   }
 
@@ -79,7 +79,7 @@ class MultipleExpectationsTests extends FlatSpec with Matchers {
       "There were 2 errors:" ::
       " - chaij.UnmetExpectationException(Expected a ok-ish boolean.)" ::
       " - chaij.UnmetExpectationException(Expected 2 to be above 3.)" ::
-			Nil
+      Nil
     )
   }
 
@@ -118,7 +118,7 @@ class MultipleExpectationsTests extends FlatSpec with Matchers {
       "There were 2 errors:" ::
       " - chaij.UnmetExpectationException(Expected a ok-ish boolean.)" ::
       " - chaij.UnmetExpectationException(Expected 2 to be above 3.)" ::
-			Nil
+      Nil
     )
   }
 
