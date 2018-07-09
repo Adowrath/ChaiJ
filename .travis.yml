@@ -13,14 +13,15 @@ scala:
 
 jdk:
   - oraclejdk8
-  - oraclejdk9
+  - openjdk8
   - oraclejdk10
+  - openjdk10
 
-matrix:
-  allow_failures:
-    - scala: 2.13.0-M4
-    - jdk: oraclejdk9
-    - jdk: oraclejdk10
+# No more failures allowed. 2.13 milestones should be effectively built against.
+# matrix:
+#   allow_failures:
+#     - scala: 2.13.0-M4
+#     - jdk: oraclejdk10
 
 
 script:
