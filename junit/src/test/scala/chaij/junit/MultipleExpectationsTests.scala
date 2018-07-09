@@ -28,7 +28,11 @@ class MultipleExpectationsTests extends FlatSpec with Matchers {
     }, description).evaluate()
   }
 
-  "MultipleExpectation.all" should "accept a single truth" in {
+  "MultipleExpectation.all" should "have a correct toString" in {
+    allRule.toString should equal ("MultipleExpectations(enabledByDefault=true)")
+  }
+
+  it should "accept a single truth" in {
     run(allRule) {
       expect(true).to.be.ok()
     }
@@ -83,7 +87,11 @@ class MultipleExpectationsTests extends FlatSpec with Matchers {
     )
   }
 
-  "MultipleExpectation.none" should "accept a single truth" in {
+  "MultipleExpectation.none" should "have a correct toString" in {
+    noneRule.toString should equal ("MultipleExpectations(enabledByDefault=false)")
+  }
+
+  it should "accept a single truth" in {
     run(noneRule) {
       expect(true).to.be.ok()
     }
