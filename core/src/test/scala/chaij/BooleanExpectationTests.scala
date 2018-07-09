@@ -7,8 +7,10 @@ class BooleanExpectationTests extends MessageSpec {
 
   override type TestedType = Boolean
   override type ExpectationType = BooleanExpectation
+  def expectationTypeName: String = "BooleanExpectation"
   override def expect(value: Boolean) = ChaiJ.expect(value)
   override def expect(value: Boolean, msg: String) = ChaiJ.expect(value, msg)
+  def constructDummy(msg: String): (String, ExpectationType) = ("true", expect(true, msg))
 
   behavior of "Boolean expectations"
 

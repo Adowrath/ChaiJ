@@ -6,8 +6,15 @@ trait MessageSpec extends FlatSpec with Matchers {
 
   type TestedType
   type ExpectationType
+  def expectationTypeName: String
   def expect(value: TestedType): ExpectationType
   def expect(value: TestedType, msg: String): ExpectationType
+  def constructDummy(msg: String): (String, ExpectationType)
+
+  it should "provide a standardized toString" in {
+    val (valString, dummy) = constructDummy("Dummy-Text")
+    dummy.toString should equal (s"$expectationTypeName(value=$valString, customText=Dummy-Text)")
+  }
 
   def expectMessage(msg: String)(body: => Unit): Unit = {
     the [UnmetExpectationException] thrownBy body should have message msg

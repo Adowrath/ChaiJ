@@ -9,8 +9,10 @@ class IntExpectationTests extends MessageSpec {
 
   override type TestedType = Int
   override type ExpectationType = IntExpectation
+  def expectationTypeName: String = "IntExpectation"
   override def expect(value: Int) = ChaiJ.expect(value)
   override def expect(value: Int, msg: String) = ChaiJ.expect(value, msg)
+  def constructDummy(msg: String): (String, ExpectationType) = ("1", expect(1, msg))
 
   behavior of "Long expectations"
 

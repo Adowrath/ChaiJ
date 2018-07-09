@@ -9,8 +9,10 @@ class DoubleExpectationTests extends MessageSpec {
 
   override type TestedType = Double
   override type ExpectationType = DoubleExpectation
+  def expectationTypeName: String = "DoubleExpectation"
   override def expect(value: Double) = ChaiJ.expect(value)
   override def expect(value: Double, msg: String) = ChaiJ.expect(value, msg)
+  def constructDummy(msg: String): (String, ExpectationType) = ("1.00000", expect(1.0D, msg))
 
   behavior of "Double expectations"
 

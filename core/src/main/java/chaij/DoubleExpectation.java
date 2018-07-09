@@ -491,8 +491,8 @@ public final class DoubleExpectation extends BaseExpectation<DoubleExpectation> 
 	
 	@Override
 	public String toString() {
-		
-		return String.format("DoubleExpectation(value=%f, customText=%s)",
+
+		return String.format("DoubleExpectation(value=%.5f, customText=%s)",
 		                     my, customText
 		);
 	}
